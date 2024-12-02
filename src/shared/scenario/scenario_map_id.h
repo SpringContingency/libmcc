@@ -1,11 +1,5 @@
 #pragma once
 
-#include <array>
-
-extern std::array<const char*, 228> g_built_in_map_id;
-
-// FE FF FF FF 00 00 88 88  00 00 00 00 00 00 00 00
-
 union s_map_id {
     struct {
         int legacy_map_id;

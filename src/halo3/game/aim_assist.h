@@ -18,9 +18,9 @@ namespace Halo3 {
     };
 
     struct s_aim_assist_targeting_result {
-        datum_index target_player;
-        datum_index target_object;
-        datum_index model_target;
+        t_definition_index target_player;
+        t_definition_index target_object;
+        t_definition_index model_target;
         real primary_autoaim_level; // [0, 1]
         real secondary_autoaim_level; // [0, 1]
         real_vector3d lead_vector;

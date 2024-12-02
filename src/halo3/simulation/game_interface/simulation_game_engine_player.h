@@ -11,13 +11,13 @@ struct game_engine_player_state {
     c_player_traits player_traits;
     bool blocking_teleporter;
     char un;
-    int16 lives_remaining;
+    uint16_t lives_remaining;
     int last_betrayer;
-    int16 respawn_timer2;
+    uint16_t respawn_timer2;
     bool vehicle_entrance_ban;
     bool active_in_game;
     bool sitting_out_exists;
     char un1;
-    int16 desired_respawn_player;
+    uint16_t desired_respawn_player;
     Vector3 player_control_aiming;
 };

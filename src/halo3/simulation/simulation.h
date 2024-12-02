@@ -40,14 +40,14 @@ namespace Halo3 {
 
     struct simulation_update_definition {
         core_update_definition core_update;
-        int64 valid_actor_mask;
-        datum_index actor_unit_index[16];
+        uint64_t valid_actor_mask;
+        t_definition_index actor_unit_index[16];
         unit_control_definition control_data[16];
         bool machine_update_exists;
         char padding[3];
         int machine_valid_mask;
         s_machine_identifier machineIdentifier[16];
-        int64 un1;
+        uint64_t un1;
         int valid_player_prediction_mask;
         player_prediction_definition player_prediction[16];
         char buffer[68];

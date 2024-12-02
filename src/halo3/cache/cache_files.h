@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../native.h"
+#include "../common.h"
 
 #include "../memory/wrapped_arrays.h"
 
@@ -22,9 +22,9 @@ namespace Halo3 {
     };
 
     struct cache_file_tag_instance {
-        int16 tag_group_index;
-        int16 datum_index_salt;
-        __int32 memory_address;
+        uint16_t tag_group_index;
+        uint16_t datum_index_salt;
+        uint32_t memory_address;
     };
 
     struct s_cache_file_tag_interop_type_fixup {
@@ -47,7 +47,7 @@ namespace Halo3 {
         int halo_engine;
         int un1;
         int tag_memory_size; // [0, 2GB]
-        int16 scenario_type; // [0, 6)
+        uint16_t scenario_type; // [0, 6)
 
         char buffer0[710];
 
@@ -68,8 +68,4 @@ namespace Halo3 {
         void* un;
         s_cache_file_header header;
     };
-
-    inline s_cache_file_globals* cache_file_globals() {
-        return reinterpret_cast<s_cache_file_globals*>(ADDRESS(0x20A8040));
-    }
 }

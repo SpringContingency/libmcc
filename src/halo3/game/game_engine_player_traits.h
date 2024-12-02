@@ -12,7 +12,7 @@ struct c_player_trait_shield_vitality {
 };
 
 struct c_player_trait_weapons {
-    int16 player_trait_damage_modifier;
+    uint16_t player_trait_damage_modifier;
     char player_trait_initial_primary_weapon;
     char player_trait_initial_secondary_weapon;
     char player_trait_initial_grenade_count;
@@ -36,8 +36,8 @@ struct c_player_trait_appearance {
 };
 
 struct c_player_trait_sensors {
-    int16 player_traits_sensors_motion_tracker;
-    int16 player_traits_sensors_motion_tracker_range;
+    uint16_t player_traits_sensors_motion_tracker;
+    uint16_t player_traits_sensors_motion_tracker_range;
 };
 
 struct c_player_traits {

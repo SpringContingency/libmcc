@@ -6,8 +6,8 @@ namespace MCC {
     class c_input_manager {
     public:
         virtual c_input_manager* initialize(bool value) = 0;
-        virtual bool input_update(int player_index, s_player_input_data* input_data, bool un) = 0;
-        virtual bool mouse_update(int player_index, s_mouse_input_data* input_data) = 0;
+        virtual bool input_update(int player_index, s_player_input_state* input_data, bool un) = 0;
+        virtual bool mouse_update(int player_index, s_mouse_state* input_data) = 0;
         virtual void gamepad_set_state(int player_index, XINPUT_VIBRATION* state) = 0;
         virtual void clear_state() = 0;
         virtual bool unknown() = 0;

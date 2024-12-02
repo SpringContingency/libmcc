@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../shared/input/input.h"
+#include "input.h"
 
 namespace MCC {
     class c_input_device {
@@ -12,7 +12,7 @@ namespace MCC {
         virtual void unknown_4() = 0;
         virtual void unknown_5() = 0;
         virtual void unknown_6() = 0;
-        virtual __int64 set_state(float a2, s_player_input_data* a3) = 0;
+        virtual __int64 set_state(float a2, s_player_input_state* a3) = 0;
         virtual void check() = 0;
         virtual void un_1() = 0;
         virtual bool sub_14087A6FC(float a2) = 0;

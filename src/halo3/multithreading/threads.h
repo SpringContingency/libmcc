@@ -1,7 +1,7 @@
 #pragma once
 
 namespace Halo3 {
-    enum e_registered_threads : __int32 {
+    enum e_registered_threads : uint32_t {
         k_thread_unknown = 0x0,
         k_thread_main = 0x1,
         k_thread_render = 0x2,

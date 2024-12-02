@@ -3,9 +3,9 @@
 namespace Halo3 {
     struct game_time_globals_struct {
         bool initialized;
-        __int8 padding_1;
-        __int8 flags;
-        __int8 padding_2;
+        uint8_t padding_1;
+        uint8_t flags;
+        uint8_t padding_2;
         __int16 tick_rate;
         float tick_length;
         int elapsed_ticks;

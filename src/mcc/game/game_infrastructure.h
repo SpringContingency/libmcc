@@ -2,7 +2,7 @@
 
 #include <d3d11.h>
 
-#include "players.h"
+#include <shared/shared.h>
 #include "game_save.h"
 #include "game_event_handler.h"
 
@@ -12,14 +12,13 @@
 #include "../scenario/scenario_map_id.h"
 
 // settings
-#include "shared/sound/game_audio_settings.h"
-#include "shared/render/game_render_settings.h"
+#include "../sound/game_audio_settings.h"
+#include "../render/game_render_settings.h"
 #include "player_profile_settings.h"
 
 // input
-#include "../input/input.h"
-#include "../input/input_abstraction.h"
-
+#include "mcc/input/input.h"
+#include "mcc/input/input_abstraction.h"
 
 struct s2 {
     struct {
@@ -169,7 +168,7 @@ public:
     virtual void sub_1401E666C() = 0;
     virtual void sub_1401E6738(__int64 a2) = 0;
     virtual void sub_1401E2438(const char* a2, float a3, float a4, float a5, float a6, int a7) = 0;
-    virtual __int64 sub_1401E2580(unsigned __int8 a2) = 0;
+    virtual __int64 sub_1401E2580(uint8_t a2) = 0;
     virtual char sub_1401E7A10() = 0;
     virtual s_gamepad_input_preferences* retrieve_gamepad_mapping(s_player_identifier player_identifier) = 0;
     virtual void unused_12() {};

@@ -4,10 +4,10 @@
 
 namespace Halo3 {
     struct campaign_weapon {
-        int16 damage_reporting_type;
-        int16 rounds_inventory;
-        int16 rounds_loaded;
-        int16 battery;
+        uint16_t damage_reporting_type;
+        uint16_t rounds_inventory;
+        uint16_t rounds_loaded;
+        uint16_t battery;
     };
 
 #pragma pack(push, 1)
@@ -40,8 +40,8 @@ namespace Halo3 {
         char game_simulation; // [0, 6)
         char game_network_type;
         bool matchmade_game;
-        int16 game_tick_rate; // [0, 300)
-        int16 padding1;
+        uint16_t game_tick_rate; // [0, 300)
+        uint16_t padding1;
         void* game_instance;
         int random_seed;
         int language;
@@ -51,7 +51,7 @@ namespace Halo3 {
         int campaign_id;
         int map_id;
         char scenario_path[260]; // 68
-        int16 initial_zone_set_index; // [0,  48)
+        uint16_t initial_zone_set_index; // [0,  48)
         bool load_level_only;
         char dump_machine_index;
         bool dump_object_log;
@@ -60,17 +60,17 @@ namespace Halo3 {
         char un0;
         char game_playback;
         bool record_saved_film;
-        int16 un1;
+        uint16_t un1;
         int playback_start_ticks;
         int playback_length_in_ticks;
-        int16 campaign_difficulty;
-        int16 campaign_insertion_point;
-        int16 campaign_metagame_scoring;
+        uint16_t campaign_difficulty;
+        uint16_t campaign_insertion_point;
+        uint16_t campaign_metagame_scoring;
         bool campaign_metagame_enabled;
         char un00;
         bool campaign_allow_persistent_storage;
         char un000;
-        int16 unnn;
+        uint16_t unnn;
         int unnnnnn;
         int unnnnnnn;
         int campaign_active_primary_skulls;
@@ -96,11 +96,11 @@ namespace Halo3 {
     struct c_game_player_options {
         bool v_true;
         bool v_false;
-        int16 user_input;
+        uint16_t user_input;
         int input_map;
         int respawn_flag; // 0x8
         int unun;
-        int64 un_flag; // 0x10
+        uint64_t un_flag; // 0x10
         wchar name[0x10]; // 0x18
         char un1[0x1E];
         wchar id[0x3]; // 0x56

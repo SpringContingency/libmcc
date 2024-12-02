@@ -101,7 +101,7 @@ namespace Halo3 {
     static_assert(sizeof(s_player_configuration) == 160);
 
     struct players_globals_definition {
-        __int32 player_count;
+        uint32_t player_count;
         bool disable_input;
     };
 
@@ -169,17 +169,17 @@ namespace Halo3 {
         s_player_identifier player_identifier;
         int left_game_time;
         s_machine_identifier machine_identifier;
-        int16 machine_index;
-        int16 machine_user_index;
-        int16 controller_index;
+        uint16_t machine_index;
+        uint16_t machine_user_index;
+        uint16_t controller_index;
         int machine_controller_index;
         Structures::s_cluster_reference cluster_reference;
         char padding[2];
-        datum_index unit_index; // 40
-        datum_index dead_unit_index; // 0x2C
+        t_definition_index unit_index; // 40
+        t_definition_index dead_unit_index; // 0x2C
 
         // unsure
-        datum_index failed_teleport_unit_index;
+        t_definition_index failed_teleport_unit_index;
         dword_flags latched_control_flags;
         __int16 cooldown_reset_unknown40;
         __int16 cooldown_reset_unknown42;
@@ -240,20 +240,20 @@ namespace Halo3 {
         byte __data2D91[3];
         multiplayer_player_info multiplayer;
 
-//        __int8 v6[0x33];// 0x1AC respawn_time_second
-//        __int8 coop_index;// 0x1D7
-//        __int8 v7[0x2];
-//        __int8 v8[30];
+//        uint8_t v6[0x33];// 0x1AC respawn_time_second
+//        uint8_t coop_index;// 0x1D7
+//        uint8_t v7[0x2];
+//        uint8_t v8[30];
 //        c_player_traits traits; // 504
 //        struct Multiplayer {
 //            float powerup_pickup_time[4];
 //        };
-//        __int8 v11[128];
+//        uint8_t v11[128];
 //        Vector3 position2;// 0x294
-//        datum_index object_datum_index2;
-//        datum_index restore_datum_index2;
+//        t_definition_index object_datum_index2;
+//        t_definition_index restore_datum_index2;
 //        float uk0, uk1, uk2;
-//        __int8 v20[0x3C];
+//        uint8_t v20[0x3C];
     };
 
     static_assert((sizeof(players_definition) == 0x2F0));

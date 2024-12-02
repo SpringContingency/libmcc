@@ -2,7 +2,7 @@
 
 namespace Halo3 {
     struct c_rasterizer {
-        enum e_surface : __int32 {
+        enum e_surface : uint32_t {
             _surface_none = 0x0,
             _surface_disable = 0x1,
             _surface_display = 0x2,

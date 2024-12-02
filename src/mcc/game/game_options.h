@@ -1,7 +1,6 @@
 #pragma once
 
-#include "players.h"
-#include "../scenario/scenario_map_id.h"
+#include "../common.h"
 
 enum e_game_settings_games {
     _game_settings_games_NetworkSessionLayer = -2,

@@ -10,7 +10,7 @@ struct render_texture_globals_definition {
 
     int render_mode; // 0x4
 
-    datum_index object; // 0x1C
+    t_definition_index object; // 0x1C
     int marker; // 0x20
 
     Vector3 position_world_offset; // 0x28
@@ -20,7 +20,7 @@ struct render_texture_globals_definition {
     Vector2 resolution; // 0x60
 
     // attaches the render texture camera to a given object marker
-    void attach_to_object(datum_index target, int marker = 0) {
+    void attach_to_object(t_definition_index target, int marker = 0) {
         *(int *) (this + 0x8) = 0;
         *(int *) (this + 0x1C) = target;
         *(int *) (this + 0x20) = marker;
@@ -28,7 +28,7 @@ struct render_texture_globals_definition {
     }
 
     // targets the render texture camera to view a given object marker
-    void target_object(datum_index target, int marker = 0) {
+    void target_object(t_definition_index target, int marker = 0) {
         *(int *) (this + 0xC) = 0;
         *(int *) (this + 0x34) = target;
         *(int *) (this + 0x38) = marker;

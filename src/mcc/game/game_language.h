@@ -2,7 +2,7 @@
 
 #include <array>
 
-#include "../util/string.inl"
+#include "../common.h"
 
 enum e_game_language : int {
     _game_language_en_AU = 0,

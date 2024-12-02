@@ -2,7 +2,7 @@
 
 #include <Windows.h>
 
-#include "../../shared/game/game_options.h"
+#include "game_options.h"
 
 namespace MCC {
     enum e_game : int {

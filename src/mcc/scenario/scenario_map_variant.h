@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../game/game_options.h"
+#include "mcc/game/game_options.h"
 
 class c_scenario_map_variant_interface {
 public:

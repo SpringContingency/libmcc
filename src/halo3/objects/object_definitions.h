@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../native.h"
+#include "../common.h"
 
 #include "damage_owner.h"
 #include "../structures/structure_bsp_definitions.h"
@@ -26,19 +26,15 @@ namespace Halo3 {
     struct object_type_definition {
         const char *full_name;
         char group_tag[4];
-        int16 size;
-        int16 un[9];
+        uint16_t size;
+        uint16_t un[9];
         void *func[0x25];
         void *parent[0x13];
     };
 
-    inline object_type_definition** object_type_definitions() {
-        return reinterpret_cast<object_type_definition**>(ADDRESS(0x814050));
-    }
-
     struct object_header_block_reference {
-        int16 size;
-        int16 offset;
+        uint16_t size;
+        uint16_t offset;
     };
 
     static_assert(sizeof(object_header_block_reference) == 0x4);
@@ -245,29 +241,29 @@ namespace Halo3 {
 //            _object_is_early_mover_child_bit = 0x10,
 //        };
 //
-//        t_datum_type datum;//0x0
+//        t_definition_index datum;//0x0
 //        eObjectFlags object_flags; //0x4
 //        int v0;
-//        datum_index next_object_index;//0xC
-//        datum_index parent_object_index;//0x10
-//        __int8 v1[0x3C];
+//        t_definition_index next_object_index;//0xC
+//        t_definition_index parent_object_index;//0x10
+//        uint8_t v1[0x3C];
 //        Vector3 position;//0x50
 //        Vector3 facing;//0x5C
 //        Vector3 up;//0x68
-//        __int8 b2[0x16];//0x74
+//        uint8_t b2[0x16];//0x74
 //        float scale;//0x8C
-//        __int8 v3[0x6];
-//        __int8 type;//0x96
-//        __int8 v4[0x11];
+//        uint8_t v3[0x6];
+//        uint8_t type;//0x96
+//        uint8_t v4[0x11];
 //        ePhysicsFlags physics_flags;//0xA8
-//        __int8 v5[0xA];
-//        __int8 variant_index;//0xB6
-//        __int8 v6[0x15];
+//        uint8_t v5[0xA];
+//        uint8_t variant_index;//0xB6
+//        uint8_t v6[0x15];
 //        unsigned int physics;//0xCC
-//        __int8 v7[0x24];
+//        uint8_t v7[0x24];
 //        float health;//0xF4
 //        float shield;//0xF8
-//        __int8 v8[0x14];
+//        uint8_t v8[0x14];
 //        unsigned int damage_flags;//1<<4 0x110
 //
 //        /*

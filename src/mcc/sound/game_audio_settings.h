@@ -7,7 +7,7 @@ struct s_game_audio_settings {
     float VoiceChatVolume;
     float un;
     char PrimaryUserPreferredInputDevice;
-    __int8 padding2;
+    uint8_t padding2;
     char VoiceChatInputDevice[256];
     char VoiceChatOutputDevice[256];
     char AudioOutputDevice[256];

@@ -6,18 +6,18 @@ struct director_globals_definition {
     struct cam_t {
         void *pp_func1;
         void *pp_mode_func;
-        datum_index target;
-        __int8 un0[0xC];
+        t_definition_index target;
+        uint8_t un0[0xC];
         Vector3 position;
         Radian3 rotation;
-        __int8 un[0x120];
+        uint8_t un[0x120];
         int index; // 0x158
-        __int8 un1[0x180 - 0x15C];
+        uint8_t un1[0x180 - 0x15C];
     } camera[MAX_LOCAL_PLAYERS];
 
     static_assert((sizeof(cam_t) == 0x180));
 
-    __int8 un0[0x604 - MAX_LOCAL_PLAYERS * sizeof(cam_t)];
+    uint8_t un0[0x604 - MAX_LOCAL_PLAYERS * sizeof(cam_t)];
 
     // 0x604
     struct mode_t {

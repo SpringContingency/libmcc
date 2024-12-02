@@ -6,15 +6,15 @@
 #pragma pack(push, 1)
 
 struct c_player_update {
-    datum_index player_index;
-    int64 player_identifier;
+    t_definition_index player_index;
+    uint64_t player_identifier;
     int update_type;
     machine_identifier_definition machine_identifier;
-    datum_index user_index;
-    datum_index controller_index;
+    t_definition_index user_index;
+    t_definition_index controller_index;
     bool player_left_game;
     bool player_joined_in_progress;
-    int64 un;
+    uint64_t un;
     c_player_configuration configuration;
     int swap_player_index;
     char swap_player_identifier[12];

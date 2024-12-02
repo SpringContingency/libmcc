@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../native.h"
+#include "../common.h"
 
 #include "../memory/static_arrays.h"
 
@@ -22,19 +22,15 @@ namespace Halo3 {
             _object_header_child_bit = 1 << 7,
         };
 
-        int16 un;
-        c_flags<e_object_header, __int8, 255> flags;
+        uint16_t un;
+        c_flags<e_object_header, uint8_t, 255> flags;
         char un1;
         char cluster_reference;
         char type;
-        int16 data_size;
+        uint16_t data_size;
 
-        int64 v1;
+        uint64_t v1;
 
         object_datum* datum;
     };
-
-    inline datum_index object_new(object_placement_data* data) {
-        return INVOKE<datum_index>(0x341738, data);
-    }
 }

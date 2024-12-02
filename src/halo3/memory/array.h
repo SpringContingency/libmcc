@@ -32,7 +32,7 @@ namespace Halo3 {
         c_allocation_base *allocation;
         int next_index;
         int first_unallocated;
-        __int32 actual_count;
+        uint32_t actual_count;
         word next_identifier;
         word isolated_next_identifier; // 70
         char* data;
@@ -40,8 +40,8 @@ namespace Halo3 {
         int offset_to_data;
         int offset_to_bit_vector;   // 92
 
-        inline bool isValid(int16 index) const { return index >= 0 && index < size && index < maximum_count; }
-        inline char* get(int16 index) const { return (char*)((int64)data + (int64)size * (int16)index); }
-        inline __int32 datum_index(int16 index) const { return ((__int32)(*(int16*)((int64)data + index * size)) << 16) | index;}
+        inline bool isValid(uint16_t index) const { return index >= 0 && index < size && index < maximum_count; }
+        inline char* get(uint16_t index) const { return (char*)((uint64_t)data + (uint64_t)size * (uint16_t)index); }
+        inline uint32_t t_definition_index(uint16_t index) const { return ((uint32_t)(*(uint16_t*)((uint64_t)data + index * size)) << 16) | index;}
     };
 }
