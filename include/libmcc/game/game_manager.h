@@ -154,7 +154,7 @@ namespace libmcc {
         DEF_PVF(void, sub_1401E440C);
         DEF_PVF(void, sub_1401E4544);
         DEF_PVF(void, sub_1401E4ED4);
-        DEF_PVF(void, sub_1401C1930);
+        DEF_PVF(void, unused_1);
         DEF_PVF(void, sub_1401F6630);
         DEF_PVF(void, sub_1401E4F44);
         DEF_PVF(void, sub_1401E4F58);
@@ -229,14 +229,14 @@ namespace libmcc {
         DEF_PVF(void, sub_1401E5880);
         DEF_PVF(void, sub_1401E77DC);
         DEF_PVF(void, sub_1401E77C8);
-        DEF_PVF(void, sub_1401C1930);
-        DEF_PVF(void, sub_1401C1930);
-        DEF_PVF(void, sub_1401C1930);
-        DEF_PVF(void, sub_1401C1930);
-        DEF_PVF(void, sub_1401C1930);
-        DEF_PVF(void, sub_1401C1930);
-        DEF_PVF(void, sub_1401C1930);
-        DEF_PVF(void, sub_1401C1930);
+        DEF_PVF(void, unused_2);
+        DEF_PVF(void, unused_3);
+        DEF_PVF(void, unused_4);
+        DEF_PVF(void, unused_5);
+        DEF_PVF(void, unused_6);
+        DEF_PVF(void, unused_7);
+        DEF_PVF(void, unused_8);
+        DEF_PVF(void, unused_9);
         DEF_PVF(void, sub_1401E77FC);
         DEF_PVF(void, sub_1401E788C);
         DEF_PVF(void, sub_1401E3EFC);
@@ -248,8 +248,8 @@ namespace libmcc {
         DEF_PVF(void, sub_1401E7A18);
         DEF_PVF(void, sub_1401C1920);
         DEF_PVF(void, sub_1401E7AF0);
-        DEF_PVF(void, sub_1401C1930);
-        DEF_PVF(void, sub_1401C1930);
+        DEF_PVF(void, unused_10);
+        DEF_PVF(void, unused_11);
     };
 
 #define DEF_VFT_IMPL(ret, name, ...) DEF_VFT(ret, name, i_game_manager* This, __VA_ARGS__)
@@ -386,7 +386,7 @@ namespace libmcc {
         DEF_VFT_IMPL(void, sub_1401E440C);
         DEF_VFT_IMPL(void, sub_1401E4544);
         DEF_VFT_IMPL(void, sub_1401E4ED4);
-        DEF_VFT_IMPL(void, sub_1401C1930);
+        DEF_VFT_IMPL(void, unused_1);
         DEF_VFT_IMPL(void, sub_1401F6630);
         DEF_VFT_IMPL(void, sub_1401E4F44);
         DEF_VFT_IMPL(void, sub_1401E4F58);
@@ -449,7 +449,7 @@ namespace libmcc {
         DEF_VFT_IMPL(void, sub_1401E74C0);
         DEF_VFT_IMPL(void, sub_1401E7500);
         DEF_VFT_IMPL(void, sub_1401E750C);
-        DEF_VFT_IMPL(void, sub_1401E572C);
+        DEF_VFT_IMPL(bool, local_user_get_player, XUID* xuid, wchar_t* name, uint32_t size, int player);
         DEF_VFT_IMPL(void, sub_1401E7540);
         DEF_VFT_IMPL(void, sub_1401E75B0);
         DEF_VFT_IMPL(void, sub_1401E75E8);
@@ -461,14 +461,14 @@ namespace libmcc {
         DEF_VFT_IMPL(void, sub_1401E5880);
         DEF_VFT_IMPL(void, sub_1401E77DC);
         DEF_VFT_IMPL(void, sub_1401E77C8);
-        DEF_VFT_IMPL(void, sub_1401C1930);
-        DEF_VFT_IMPL(void, sub_1401C1930);
-        DEF_VFT_IMPL(void, sub_1401C1930);
-        DEF_VFT_IMPL(void, sub_1401C1930);
-        DEF_VFT_IMPL(void, sub_1401C1930);
-        DEF_VFT_IMPL(void, sub_1401C1930);
-        DEF_VFT_IMPL(void, sub_1401C1930);
-        DEF_VFT_IMPL(void, sub_1401C1930);
+        DEF_VFT_IMPL(void, unused_2);
+        DEF_VFT_IMPL(void, unused_3);
+        DEF_VFT_IMPL(void, unused_4);
+        DEF_VFT_IMPL(void, unused_5);
+        DEF_VFT_IMPL(void, unused_6);
+        DEF_VFT_IMPL(void, unused_7);
+        DEF_VFT_IMPL(void, unused_8);
+        DEF_VFT_IMPL(void, unused_9);
         DEF_VFT_IMPL(void, sub_1401E77FC);
         DEF_VFT_IMPL(void, sub_1401E788C);
         DEF_VFT_IMPL(void, sub_1401E3EFC);
@@ -477,10 +477,10 @@ namespace libmcc {
         DEF_VFT_IMPL(void, sub_1401E2438);
         DEF_VFT_IMPL(void, sub_1401E2580);
         DEF_VFT_IMPL(void, sub_1401E7A10);
-        DEF_VFT_IMPL(void, sub_1401E7A18);
+        DEF_VFT_IMPL(s_gamepad_mapping*, local_user_get_gamepad_mapping, XUID* xuid);
         DEF_VFT_IMPL(void, sub_1401C1920);
         DEF_VFT_IMPL(void, sub_1401E7AF0);
-        DEF_VFT_IMPL(void, sub_1401C1930);
-        DEF_VFT_IMPL(void, sub_1401C1930);
+        DEF_VFT_IMPL(void, unused_10);
+        DEF_VFT_IMPL(void, unused_11);
     };
 }

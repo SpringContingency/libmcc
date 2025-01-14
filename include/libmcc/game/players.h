@@ -2,8 +2,8 @@
 
 #include "../math/math.h"
 
-#include "./player_loadout.h"
 #include "./player_mapping.h"
+#include "./player_loadouts.h"
 #include "./player_customization.h"
 
 namespace libmcc {
