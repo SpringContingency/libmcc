@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../native.h"
 #include "../../../game/game_manager.h"
 
 namespace libmcc::mcc {
@@ -18,7 +19,7 @@ namespace libmcc::mcc {
 
 	static_assert(sizeof(c_game_manager) == 0xB788);
 
-	inline c_game_manager* p_game_manager() {
-		return REF<c_game_manager>(_mcc_data_game_manager);
+	inline c_game_manager* g_game_manager() {
+		return REF<c_game_manager>(_data_game_manager);
 	}
 }

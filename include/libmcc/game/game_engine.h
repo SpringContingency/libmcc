@@ -9,6 +9,7 @@
 #include <d3d11.h>
 
 #define GAME_ENGINE_COMMAND_PREFIX "HS: "
+#define GAME_ENGINE_COMMAND_PREFIX_LENGTH 4
 #define GAME_ENGINE_COMMAND(command) GAME_ENGINE_COMMAND_PREFIX command
 
 namespace libmcc {

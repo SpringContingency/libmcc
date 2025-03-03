@@ -1,0 +1,39 @@
+#pragma once
+
+#include "../native.h"
+
+namespace libmcc::halo3 {
+    class c_physical_memory_contiguous_region_listener {
+    public:
+        virtual void initialize_resize_buffer(void *a1, int a2) = 0;
+        virtual void resize_no_fail(void *a1, int a2, void *a3, int a4) = 0;
+        virtual void dispose_resize_buffer(void *a1, int a2) = 0;
+    };
+
+    struct s_physical_memory_stage {
+        void* low_address;
+        void* high_address;
+        unsigned int next_available_zero_allocation;
+        unsigned int __unknownC;
+        unsigned int __unknown10;
+    };
+
+    struct s_physical_memory_globals {
+        void* get_tag_base_address() {
+            return reinterpret_cast<void*>(allocation_base_address - 0x150000000ll);
+        }
+
+        c_physical_memory_contiguous_region_listener* resize_region_listener;
+        char* allocation_base_address;
+        char* allocation_end_address;
+        uint64_t no_mans_land;
+        int current_stage;
+        s_physical_memory_stage memory_stages[8];
+    };
+
+    static_assert(sizeof(s_physical_memory_globals) == 296);
+
+    inline s_physical_memory_globals* physical_memory_globals() {
+        return REF<s_physical_memory_globals>(_data_physical_memory_globals);
+    }
+}

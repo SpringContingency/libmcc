@@ -5,6 +5,11 @@
 namespace libmcc {
     enum e_customization_item : uint32_t;
 
+    struct s_skin_customization {
+        int object; 
+        e_customization_item skin; 
+    };
+
     struct s_player_customization {
         e_customization_item helmet_index; // 0x40
         e_customization_item left_shoulder_index; // 0x44
@@ -33,7 +38,7 @@ namespace libmcc {
         e_customization_item player_model_tertiary_color; // 0xA0
         e_customization_item spartan_pose; // 0xA4
         e_customization_item elite_pose; // 0xA8
-        struct skin_t { int object; e_customization_item skin; } skins[32]; // 0xAC
+        s_skin_customization skins[32]; // 0xAC
     };
 
 	static_assert(sizeof(s_player_customization) == 0x16C);

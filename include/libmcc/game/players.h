@@ -1,12 +1,22 @@
 #pragma once
 
-#include "../math/math.h"
+#include "../math/math.inl"
 
 #include "./player_mapping.h"
 #include "./player_loadouts.h"
 #include "./player_customization.h"
 
 namespace libmcc {
+    enum e_local_player : int {
+		_local_player_0,
+		_local_player_1,
+		_local_player_2,
+		_local_player_3,
+
+		k_local_player_count,
+		k_local_player_none = -1,
+	};
+
     struct s_player_profile {
         bool subtitle_setting; // 0x0
         bool subtitle_size_setting; // 0x1
@@ -40,13 +50,15 @@ namespace libmcc {
 
         bool use_female_voice; // 0x27
         bool hold_to_zoom; // 0x28
-        char padding_0[3];
+        char : 8;
+        char : 8;
+        char : 8;
         int player_model_primary_color_index; // 0x2C
         int player_model_secondary_color_index; // 0x30
         int player_model_tertiary_color_index; // 0x34
         bool use_elite_model; // 0x38
         bool lock_max_aspect_ratio; // 0x39
-        char unknown_0; // 0x3A
+        char : 8; // 0x3A
         bool users_skins_enabled; // 0x3B
         int player_model_permutation; // 0x3C
 

@@ -10,6 +10,8 @@
 #include "../scenario/scenario_map_id.h"
 #include "../scenario/scenario_map_variant.h"
 
+#include "../input/input.h"
+
 #include <d3d11.h>
 
 namespace libmcc {
@@ -112,16 +114,16 @@ namespace libmcc {
         /// <summary>
         /// [Main Thread] Set the player's look control inverted via HS
         /// </summary>
-        /// <param name="player">player index [0,3]</param>
+        /// <param name="player"></param>
         /// <param name="inverted"></param>
-        DEF_PVF(void, player_set_look_control, int player, bool inverted);
+        DEF_PVF(void, player_set_look_control, e_local_player player, bool inverted);
 
         /// <summary>
         /// [Main Thread] Set player profile
         /// </summary>
         /// <param name="player"></param>
         /// <returns></returns>
-        DEF_PVF(void, player_set_profile, int player, s_player_profile* profile);
+        DEF_PVF(void, player_set_profile, e_local_player player, s_player_profile* profile);
 
         /// <summary>
         /// [Main Thread] Need further research
@@ -165,10 +167,10 @@ namespace libmcc {
         DEF_PVF(void, sub_1401E78FC);
         DEF_PVF(void, sub_1401E5404);
         DEF_PVF(void, sub_1401E4EC4);
-        DEF_PVF(void, sub_1401E5424);
-        DEF_PVF(void, sub_1401E550C);
-        DEF_PVF(void, sub_1401E5584);
-        DEF_PVF(void, sub_1401E5568);
+        DEF_PVF(bool, input_update, e_local_player player, s_input_state* state);
+        DEF_PVF(bool, input_update_gamepad, e_local_player player, s_input_state* state);
+        DEF_PVF(float, input_get_time, e_local_player player);
+        DEF_PVF(void, input_set_rumble, e_local_player player, s_rumble_state* state);
         DEF_PVF(void, sub_1401E5AD8);
         DEF_PVF(void, sub_1401E5B70);
         DEF_PVF(void, sub_1401E5BBC);
@@ -344,16 +346,16 @@ namespace libmcc {
         /// <summary>
         /// [Main Thread] Set the player's look control inverted via HS
         /// </summary>
-        /// <param name="player">player index [0,3]</param>
+        /// <param name="player"></param>
         /// <param name="inverted"></param>
-        DEF_VFT_IMPL(void, player_set_look_control, int player, bool inverted);
+        DEF_VFT_IMPL(void, player_set_look_control, e_local_player player, bool inverted);
 
         /// <summary>
         /// [Main Thread] Set player profile
         /// </summary>
         /// <param name="player"></param>
         /// <returns></returns>
-        DEF_VFT_IMPL(void, player_set_profile, int player, s_player_profile* profile);
+        DEF_VFT_IMPL(void, player_set_profile, e_local_player player, s_player_profile* profile);
 
         /// <summary>
         /// [Main Thread] Need further research
@@ -395,12 +397,12 @@ namespace libmcc {
         DEF_VFT_IMPL(void, sub_1401E51A4);
         DEF_VFT_IMPL(void, sub_1401E51AC);
         DEF_VFT_IMPL(void, sub_1401E78FC);
-        DEF_VFT_IMPL(void, sub_1401E5404);
+        DEF_VFT_IMPL(s_player_profile*, local_user_get_profile, XUID xuid);
         DEF_VFT_IMPL(void, sub_1401E4EC4);
-        DEF_VFT_IMPL(void, sub_1401E5424);
-        DEF_VFT_IMPL(void, sub_1401E550C);
-        DEF_VFT_IMPL(void, sub_1401E5584);
-        DEF_VFT_IMPL(void, sub_1401E5568);
+        DEF_VFT_IMPL(bool, input_update, e_local_player player, s_input_state* state);
+        DEF_VFT_IMPL(bool, input_update_gamepad, e_local_player player, s_input_state* state);
+        DEF_VFT_IMPL(float, input_get_time, e_local_player player);
+        DEF_VFT_IMPL(void, input_set_rumble, e_local_player player, s_rumble_state* state);
         DEF_VFT_IMPL(void, sub_1401E5AD8);
         DEF_VFT_IMPL(void, sub_1401E5B70);
         DEF_VFT_IMPL(void, sub_1401E5BBC);
@@ -449,7 +451,7 @@ namespace libmcc {
         DEF_VFT_IMPL(void, sub_1401E74C0);
         DEF_VFT_IMPL(void, sub_1401E7500);
         DEF_VFT_IMPL(void, sub_1401E750C);
-        DEF_VFT_IMPL(bool, local_user_get_player, XUID* xuid, wchar_t* name, uint32_t size, int player);
+        DEF_VFT_IMPL(bool, local_user_get_player, XUID* xuid, wchar_t* name, uint32_t size, e_local_player player);
         DEF_VFT_IMPL(void, sub_1401E7540);
         DEF_VFT_IMPL(void, sub_1401E75B0);
         DEF_VFT_IMPL(void, sub_1401E75E8);
@@ -477,7 +479,7 @@ namespace libmcc {
         DEF_VFT_IMPL(void, sub_1401E2438);
         DEF_VFT_IMPL(void, sub_1401E2580);
         DEF_VFT_IMPL(void, sub_1401E7A10);
-        DEF_VFT_IMPL(s_gamepad_mapping*, local_user_get_gamepad_mapping, XUID* xuid);
+        DEF_VFT_IMPL(s_gamepad_mapping*, local_user_get_gamepad_mapping, XUID xuid);
         DEF_VFT_IMPL(void, sub_1401C1920);
         DEF_VFT_IMPL(void, sub_1401E7AF0);
         DEF_VFT_IMPL(void, unused_10);

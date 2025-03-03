@@ -1,8 +1,12 @@
 #pragma once
 
-#include "./math/math.h"
+#include "./win32/win32.h"
+#include "./xdk/xdk.h"
+#include "./math/math.inl"
 
-typedef uint64_t XUID;
+#include <array>
+
+typedef int string_id;
 
 #define DEF_PVF(ret, name, ...) virtual ret __fastcall name(__VA_ARGS__) = 0
 
