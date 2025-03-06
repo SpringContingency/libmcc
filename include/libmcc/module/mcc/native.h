@@ -23,17 +23,17 @@ namespace libmcc::mcc {
 	}
 
 	enum e_func {
-		_func_get_user_by_xuid = 0x2D3094,
-		_func_get_user_profile = 0x1E4794,
+		_func_get_user_by_xuid = 0x38cf54, // 48 8B C4 57 48 83 EC ? 48 C7 40 ? ? ? ? ? 48 89 58 ? 48 89 70 ? 49 8B F0 48 8B FA 48 89 50
+		_func_get_user_profile = 0x1e8ebc, // 48 89 54 24 ? 48 89 4C 24 ? 55 53 56 57 41 54 41 55 41 56 41 57 48 8B EC 48 83 EC ? 48 C7 45 ? ? ? ? ? 48 8B F2
 	};
 
 	enum e_data {
-		_data_p_game_data = 0x3FFD4C8,
-		_data_p_game_engine = 0x3FFCAA8,
-		_data_p_game_globals = 0x3FFCAC0,
-		_data_game_manager = 0x3F76E50,
-		_data_p_input_manager = 0x3FFFFF8,
+		_data_p_game_data = 0x4001658, // 74 ? 8B 08 E8 ? ? ? ? EB ? 83 C8 ? 83 F8 ? 40 0F 94 C5
+		_data_p_game_engine = 0x4000ba0, // 0F 84 ? ? ? ? 8B C8 E8 ? ? ? ? 8B C8
+		_data_p_game_globals = 0x4000bc8, // C6 80 ? ? ? ? ? E8 ? ? ? ? 33 DB
+		_data_game_manager = 0x3f7b190, // E8 ? ? ? ? 48 8D 05 ? ? ? ? 48 89 05 ? ? ? ? 33 C0
+		_data_p_input_manager = 0x4001b78, // 48 8B 0D ? ? ? ? 45 33 C9 48 85 C9
 
-		_data_game_globals_states = 0x3F62910,
+		_data_game_globals_states = 0x3f66890, // 49 8B 94 CE
 	};
 }
