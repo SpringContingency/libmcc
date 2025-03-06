@@ -89,10 +89,6 @@ namespace libmcc::halo3 {
             INVOKE<void>(_func_c_rasterizer_draw_primitive_up, type, primitive_count, stream_data, stride);
         }
 
-        static bool draw_debug_linestrip2d(short_point2d *points, int point_count, uint32_t color) {
-            return INVOKE<bool>(_func_c_rasterizer_draw_debug_linestrip2d, points, point_count, color);
-        }
-
         static void set_indices(int) {
         }
 

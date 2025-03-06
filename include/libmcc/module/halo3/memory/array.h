@@ -1,8 +1,12 @@
 #pragma once
 
-#include <cstdint>
+#include "./data.h"
 
 namespace libmcc::halo3 {
+    struct c_allocation_base {
+
+    };
+
     template<size_t S>
     struct c_static_string {
         char m_data[S];
@@ -27,5 +31,26 @@ namespace libmcc::halo3 {
         uint16_t m_maximum_count;
         uint16_t m_count;
         T m_elements[S];
+    };
+
+    template<typename T>
+    struct s_data_array {
+        char name[32];
+        int maximum_count;
+        int size;
+        byte alignment_bits;
+        bool valid;
+        uint16_t flags;
+        tag signature;
+        c_allocation_base* allocation;
+        int next_index;
+        int first_unallocated;
+        int actual_count;
+        uint16_t next_identifier;
+        uint16_t isolated_next_identifier;
+        T* data;
+        uint32_t* in_use_bit_vector;
+        int offset_to_data;
+        int offset_to_bit_vector;
     };
 }

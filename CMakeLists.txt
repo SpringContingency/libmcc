@@ -1,8 +1,8 @@
-cmake_minimum_required(VERSION 3.27)
+cmake_minimum_required(VERSION 3.0)
 project(libmcc)
 
 set(CMAKE_CXX_STANDARD 20)
 
-include_directories(${CMAKE_SOURCE_DIR}/include)
+add_library(libmcc STATIC ./src/libmcc.cpp "include/libmcc/module/halo3/memory/data.h")
 
-add_library(libmcc ${CMAKE_SOURCE_DIR}/src/libmcc.cpp)
+target_include_directories(libmcc PUBLIC ./include)

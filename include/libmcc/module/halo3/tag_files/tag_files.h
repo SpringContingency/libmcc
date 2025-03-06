@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../memory/data.h"
 #include "./tag_groups.h"
 
 namespace libmcc::halo3 {
@@ -8,8 +9,6 @@ namespace libmcc::halo3 {
 
 	static void set_tag_instances(cache_file_tag_instance* tag_instances) { g_tag_instances = tag_instances; }
     static void set_tag_base_address(void* tag_base_address) { g_tag_base_address = reinterpret_cast<int*>(tag_base_address); }
-
-    typedef int tag;
 
     struct s_tag_reference {
         e_group_tag group_tag;

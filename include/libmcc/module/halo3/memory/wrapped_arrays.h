@@ -1,5 +1,7 @@
 #pragma once
 
+#include "array.h"
+
 namespace libmcc::halo3 {
     template<typename T>
     struct c_wrapped_array {

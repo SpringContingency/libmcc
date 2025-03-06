@@ -4,7 +4,9 @@
 
 namespace libmcc::halo3 {
     union s_game_engine_globals {
+        s_game_engine_globals() {
 
+        }
 
         int* game_variant_game_type() {
             return reinterpret_cast<int*>(data + 81436);

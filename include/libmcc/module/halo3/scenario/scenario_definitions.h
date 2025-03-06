@@ -16,6 +16,19 @@ namespace libmcc::halo3 {
         char data[108];
     };
 
+    struct s_scenario_palette {
+        s_tag_reference object;
+    };
+
+    static_assert(sizeof(s_scenario_palette) == 0x10);
+
+	struct s_map_variant_palette : s_scenario_palette {
+		string_id display_name;
+        int maximum_allowed;
+        real price_per_instance;
+	};
+
+	static_assert(sizeof(s_map_variant_palette) == 0x1C);
 
     union scenario_definition {
         struct {
@@ -100,6 +113,43 @@ namespace libmcc::halo3 {
             s_tag_block squad_groups;
             s_tag_block squads;
             s_tag_block zones;
+
+            s_tag_block mission_scenes;
+            s_tag_block character_palette;
+            s_tag_block ai_pathfinding_data;
+            s_tag_block ai_user_hint_data;
+            s_tag_block ai_recording_references;
+            s_tag_data script_string_data;
+            s_tag_block scripts;
+            s_tag_block globals;
+            s_tag_block references;
+            s_tag_block source_files;
+            s_tag_block scripting_data;
+            s_tag_block cutscene_flags;
+            s_tag_block cutscene_camera_points;
+            s_tag_block cutscene_titles;
+            s_tag_reference custom_object_names;
+            s_tag_reference chapter_title_text;
+            s_tag_block scenario_resources;
+            s_tag_block hs_unit_seats;
+            s_tag_block scenario_kill_triggers;
+            s_tag_block scenario_safe_zone_triggers;
+            s_tag_block hs_syntax_datums;
+            s_tag_block orders;
+            s_tag_block triggers;
+            s_tag_block acoustics_palette;
+            s_tag_block old_background_sound_palette;
+            s_tag_block sound_environment_palette;
+            s_tag_block weather_palette;
+            s_tag_block atmosphere;
+            s_tag_block camera_fx_palette;
+            s_tag_block scenario_cluster_data;
+            s_tag_block acoustic_spaces;
+            int object_salts[32];
+            s_tag_block spawn_data;
+            s_tag_reference sound_effect_collection;
+            s_tag_block crates;
+            s_tag_block crate_palette;
         };
         char data[0x780];
     };

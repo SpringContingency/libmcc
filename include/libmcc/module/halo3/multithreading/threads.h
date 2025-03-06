@@ -6,6 +6,7 @@
 #include "../game/game_globals.h"
 #include "../game/player_control.h"
 #include "../camera/director.h"
+#include "../objects/objects.h"
 
 namespace libmcc::halo3 {
     struct s_thread_local_storage {
@@ -16,7 +17,7 @@ namespace libmcc::halo3 {
         s_game_engine_globals* game_engine_globals; // 0x20
         uint64_t : 64; // 0x28
         uint64_t : 64; // 0x30
-        uint64_t : 64; // 0x38
+        s_data_array<object_header_datum>* object_header_data; // 0x38
         uint64_t : 64; // 0x40
         game_globals_storage* game_globals; // 0x48
         uint64_t : 64; // 0x50
