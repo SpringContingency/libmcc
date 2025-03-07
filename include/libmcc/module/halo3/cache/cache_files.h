@@ -2,6 +2,7 @@
 
 #include "security_functions.h"
 #include "../native.h"
+#include "../cseries/cseries.h"
 #include "../tag_files/files.h"
 #include "../memory/wrapped_arrays.h"
 
@@ -111,66 +112,66 @@ namespace libmcc::halo3 {
     };
 
     struct s_cache_file_header {
-            tag header_signature;
-            uint32_t version;
-            int file_size;
-            char halo_engine;
-            int tag_buffer_offset;
-            int total_tags_size; // [0, 2GB]
-            e_scenario_type scenario_type; // [0, 6)
-            int : 32;
-            int file_table_count;
-            int file_table_offset;
-            int file_table_size;
-            int file_index_table_offset;
-            int string_table_count;
-            int string_table_offset;
-            int string_table_size;
-            int string_index_table_offset;
-            int string_namespace_table_count;
-            int string_namespace_table_offset;
-            int : 32;
-            int : 32;
-            s_file_last_modification_date last_modification_date;
-            int : 32;
-            int : 32;
-            int : 32;
-            int : 32;
-            int : 32;
-            int : 32;
-            int : 32;
-            int : 32;
-            int : 32;
-            int : 32;
-            int : 32;
-            int : 32;
-            int : 32;
-            int : 32;
-            int : 32;
-            int : 32;
-            int : 32;
-            int : 32;
-            const char build[0x20];
-            const char internal_name[0x20];
-            const char source_file[0x100];
-            char data0[256];
-            cache_file_tag_instance_t* tag_instances; // 736
-            s_cache_file_tags_header* tags_header;
-            int xdk_version;
-            uint64_t : 64;
-			s_cache_file_partition partitions[k_number_of_cache_file_partition_types]; // 768
-            int checksum1; // 864
-            int content_hash_mask;
-            uint64_t signature; // 0x17800EA664197BFCLL
-            s_network_http_request_hash content_hashes[3]; // 880
-            s_cache_file_header_hash hash;
-            s_rsa_signature rsa_signature; // 972
-            s_cache_file_interop interop; // 1228
-            s_cache_file_shared_resource_usage shared_resource_usage; // 1276
-            int insertion_point_count;
-            s_cache_file_insertion_point_resource_usage insertion_point_resource_usage_storage[12]; // 10280
-            char data1[3892];
-            tag footer_signature; // 16380
+        tag header_signature;
+        uint32_t version;
+        int file_size;
+        char halo_engine;
+        int tag_buffer_offset;
+        int tag_buffer_size; // [0, 2GB]
+        e_scenario_type scenario_type; // [0, 6)
+        int : 32;
+        int file_table_count;
+        int file_table_offset;
+        int file_table_size;
+        int file_index_table_offset;
+        int string_table_count;
+        int string_table_offset;
+        int string_table_size;
+        int string_index_table_offset;
+        int string_namespace_table_count;
+        int string_namespace_table_offset;
+        int : 32;
+        int : 32;
+        s_file_last_modification_date last_modification_date;
+        int : 32;
+        int : 32;
+        int : 32;
+        int : 32;
+        int : 32;
+        int : 32;
+        int : 32;
+        int : 32;
+        int : 32;
+        int : 32;
+        int : 32;
+        int : 32;
+        int : 32;
+        int : 32;
+        int : 32;
+        int : 32;
+        int : 32;
+        int : 32;
+        char build[0x20];
+        char internal_name[0x20];
+        char source_file[0x100];
+        char data0[256];
+        cache_file_tag_instance_t* expected_base_address; // 736
+        s_cache_file_tags_header* tags_header;
+        int xdk_version;
+        uint64_t : 64;
+		s_cache_file_partition partitions[k_number_of_cache_file_partition_types]; // 768
+        int checksum1; // 864
+        int content_hash_mask;
+        uint64_t signature; // 0x17800EA664197BFCLL
+        s_network_http_request_hash content_hashes[3]; // 880
+        s_cache_file_header_hash hash;
+        s_rsa_signature rsa_signature; // 972
+        s_cache_file_interop interop; // 1228
+        s_cache_file_shared_resource_usage shared_resource_usage; // 1276
+        int insertion_point_count;
+        s_cache_file_insertion_point_resource_usage insertion_point_resource_usage_storage[12]; // 10280
+        char data1[3892];
+        tag footer_signature; // 16380
     };
 
     static_assert(sizeof(s_cache_file_header) == 0x4000);

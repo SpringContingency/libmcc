@@ -3,6 +3,11 @@
 #include "../native.h"
 
 namespace libmcc::halo3 {
+    enum : size_t {
+        k_tag_cache_minimum_address = 0x150000000,
+        k_tag_cache_maximum_address = 0x1D0000000,
+    };
+
     class c_physical_memory_contiguous_region_listener {
     public:
         virtual void initialize_resize_buffer(void *a1, int a2) = 0;
