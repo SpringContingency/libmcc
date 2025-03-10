@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../../../common.h"
+#include "../tag_files/files.h"
 
 namespace libmcc::halo3 {
     struct c_synchronized_long {
@@ -19,10 +19,6 @@ namespace libmcc::halo3 {
     };
 
     static_assert(sizeof(s_async_buffer) == 40);
-
-    struct s_file_handle {
-        HANDLE handle;
-    };
 
     struct c_async_buffer_set_base {
         int m_buffer_count;

@@ -3,8 +3,12 @@
 #include <cstdint>
 
 namespace libmcc::halo3 {
-    enum e_group_tag : uint32_t {
-        _group_tag_scenario = 'rncs',
-        k_group_tag_invalid = 0xFFFFFFFF,
+#define TAG_GROUP(x)
+
+    enum e_tag_group : uint32_t {
+        CACHE_FILE_RESOURCE_LAYOUT_TAG = 'play',
+        CACHE_FILE_RESOURCE_GESTALT_TAG = 'zone',
+        SCENARIO_TAG = 'scnr',
+		INVALID_TAG = 0xFFFFFFFF,
     };
 }

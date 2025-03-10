@@ -1,17 +1,12 @@
 #pragma once
 
-#include "../memory/data.h"
+#include "./files.h"
 #include "./tag_groups.h"
+#include "../memory/data.h"
 
 namespace libmcc::halo3 {
-    inline static int* g_tag_base_address;
-	inline static cache_file_tag_instance* g_tag_instances;
-
-	static void set_tag_instances(cache_file_tag_instance* tag_instances) { g_tag_instances = tag_instances; }
-    static void set_tag_base_address(void* tag_base_address) { g_tag_base_address = reinterpret_cast<int*>(tag_base_address); }
-
     struct s_tag_reference {
-        e_group_tag group_tag;
+        e_tag_group group_tag;
         int : 32;
         int : 32;
         int index;
@@ -51,30 +46,27 @@ namespace libmcc::halo3 {
         int count;
         uint32_t address;
         uint32_t definition;
-
-        bool valid() {
-			return count > 0 && address != 0;
-        }
     };
 
     static_assert(sizeof(s_tag_block) == 0xC);
 
     template <typename T>
-    struct c_typed_tag_block : s_tag_block {
-        T* begin() {
-            return reinterpret_cast<T*>(g_tag_base_address + address);
-        }
-
-        T* end() {
-            return begin() + count;
-        }
-    };
+    struct c_typed_tag_block : s_tag_block {};
 
     template <typename T>
-    struct c_typed_tag_reference : s_tag_reference {
-        T* get() {
-            auto address = g_tag_instances[static_cast<uint16_t>(index)].address;
-            return reinterpret_cast<T*>(g_tag_base_address + address);
-        }
+    struct c_typed_tag_reference : s_tag_reference {};
+
+    struct s_tag_resource {
+        union {
+            int resource_handle;
+            int resource_data;
+        };
+        int definition_address;
+    };
+
+    struct s_tag_resources_block {
+        int count;
+        s_tag_resource* address;
+        s_tag_block_definition* definition;
     };
 };

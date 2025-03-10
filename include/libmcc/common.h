@@ -6,7 +6,9 @@
 
 #include <array>
 
-typedef int string_id;
+namespace libmcc {
+	typedef int string_id;
+}
 
 #define DEF_PVF(ret, name, ...) virtual ret __fastcall name(__VA_ARGS__) = 0
 

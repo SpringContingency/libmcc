@@ -24,10 +24,6 @@ namespace libmcc::halo3 {
     };
 
     struct s_physical_memory_globals {
-        int* get_tag_base_address() {
-            return reinterpret_cast<int*>(allocation_base_address - 0x150000000ll);
-        }
-
         c_physical_memory_contiguous_region_listener* resize_region_listener;
         char* allocation_base_address;
         char* allocation_end_address;

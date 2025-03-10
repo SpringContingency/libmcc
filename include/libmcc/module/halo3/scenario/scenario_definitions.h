@@ -4,7 +4,7 @@
 #include "../tag_files/tag_files.h"
 
 namespace libmcc::halo3 {
-    union s_structure_bsp;
+    struct s_structure_bsp;
 
     union scenario_structure_bsp_reference {
         struct {
