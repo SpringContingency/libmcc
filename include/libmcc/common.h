@@ -14,3 +14,8 @@ namespace libmcc {
 
 #define DEF_VFT(ret, name, ...) ret (__fastcall* name)(__VA_ARGS__)
 
+typedef int s_big_endian_int;
+typedef int s_little_endian_int;
+
+#define byte_swap(x) _byteswap_ulong(x)
+

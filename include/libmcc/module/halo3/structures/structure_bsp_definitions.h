@@ -45,10 +45,21 @@ namespace libmcc::halo3 {
         char best_plane_calculation_vertex_index;
     };
 
-    struct s_collision_edge {
-        uint16_t vertex_indices[2];
-        uint16_t edge_indices[2];
-        uint16_t surface_indices[2];
+    union s_collision_edge {
+		struct {
+			uint16_t start_vertex;
+			uint16_t end_vertex;
+			uint16_t forward_edge;
+			uint16_t reverse_edge;
+			uint16_t left_surface;
+			uint16_t right_surface;
+		};
+
+        struct {
+            uint16_t vertex_indices[2];
+            uint16_t edge_indices[2];
+            uint16_t surface_indices[2];
+        };
     };
 
     struct s_collision_vertex {

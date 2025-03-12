@@ -179,6 +179,88 @@ namespace libmcc {
     constexpr real_rgba_color g_real_rgba_yellow({ 1.0f, 1.0f, 0.0f }, 1.0f);
 }
 
+// real math
 namespace libmcc {
+    constexpr real_point2d::real_point2d() {}
+    constexpr real_point2d::real_point2d(real x, real y) : x(x), y(y) {}
+    constexpr real_point2d real_point2d::operator * (real scalar) { return { x * scalar, y * scalar }; }
 
+    constexpr real_point3d::real_point3d() {}
+    constexpr real_point3d::real_point3d(real x, real y, real z) : x(x), y(y), z(z) {}
+    constexpr real_point3d::real_point3d(const real_point3d& p, const real_vector3d& v, float f) {
+        x = p.x + v.i * f;
+        y = p.y + v.j * f;
+        z = p.z + v.k * f;
+    }
+
+    constexpr real_vector2d::real_vector2d() {}
+    constexpr real_vector2d::real_vector2d(real i, real j) : i(i), j(j) {}
+    constexpr void real_vector2d::operator += (const real_vector2d& other) {
+        i += other.i;
+        j += other.j;
+    }
+    inline real real_vector2d::distance(const real_vector2d& other) const {
+        real dx = i - other.i;
+        real dy = j - other.j;
+        return std::sqrt(dx * dx + dy * dy);
+    }
+    inline real real_vector2d::normalize() {
+        real length = std::sqrt(i * i + j * j);
+        i /= length;
+        j /= length;
+        return length;
+    }
+
+    constexpr real_vector3d::real_vector3d() {}
+    constexpr real_vector3d::real_vector3d(real i, real j, real k) : i(i), j(j), k(k) {}
+    constexpr real_vector3d::real_vector3d(const real_point3d& p0, const real_point3d& p1) : i(p1.x - p0.x), j(p1.y - p0.y), k(p1.z - p0.z) {}
+    constexpr real_vector3d::real_vector3d(const real_vector3d& up, const real_vector3d& forward) : i(up.j* forward.k - up.k * forward.j), j(up.k* forward.i - up.i * forward.k), k(up.i* forward.j - up.j * forward.i) {}
+    constexpr double real_vector3d::magnitude_squared3d() const { return i * i + j * j + k * k; }
+    inline real real_vector3d::magnitude3d() const { return std::sqrt(magnitude_squared3d()); }
+
+    constexpr real_euler_angles2d::real_euler_angles2d() {}
+    constexpr real_euler_angles2d::real_euler_angles2d(angle yaw, angle pitch) : yaw(yaw), pitch(pitch) {}
+    inline real_euler_angles2d::real_euler_angles2d(const real_vector3d& vector) : yaw(std::atan2(vector.j, vector.i)), pitch(std::atan2(vector.k, std::sqrt(vector.i* vector.i + vector.j * vector.j))) {}
+
+    constexpr real_euler_angles3d::real_euler_angles3d() {}
+	constexpr real_euler_angles3d::real_euler_angles3d(angle yaw, angle pitch, angle roll) : yaw(yaw), pitch(pitch), roll(roll) {}
+
+    constexpr real_quaternion::real_quaternion() {}
+    constexpr real_quaternion::real_quaternion(const real_matrix3x3& matrix) {
+        float trace = matrix.forward.i + matrix.left.j + matrix.up.k;
+        if (trace > 0.0f) {
+            float s = 0.5f / std::sqrt(trace + 1.0f);
+            w = 0.25f / s;
+            v.i = (matrix.up.j - matrix.left.k) * s;
+            v.j = (matrix.forward.k - matrix.up.i) * s;
+            v.k = (matrix.left.i - matrix.forward.j) * s;
+        } else {
+            if (matrix.forward.i > matrix.left.j && matrix.forward.i > matrix.up.k) {
+                float s = 2.0f * std::sqrt(1.0f + matrix.forward.i - matrix.left.j - matrix.up.k);
+                w = (matrix.up.j - matrix.left.k) / s;
+                v.i = 0.25f * s;
+                v.j = (matrix.forward.j + matrix.left.i) / s;
+                v.k = (matrix.forward.k + matrix.up.i) / s;
+            } else if (matrix.left.j > matrix.up.k) {
+                float s = 2.0f * std::sqrt(1.0f + matrix.left.j - matrix.forward.i - matrix.up.k);
+                w = (matrix.forward.k - matrix.up.i) / s;
+                v.i = (matrix.forward.j + matrix.left.i) / s;
+                v.j = 0.25f * s;
+                v.k = (matrix.up.j + matrix.left.k) / s;
+            } else {
+                float s = 2.0f * std::sqrt(1.0f + matrix.up.k - matrix.forward.i - matrix.left.j);
+                w = (matrix.left.i - matrix.forward.j) / s;
+                v.i = (matrix.forward.k + matrix.up.i) / s;
+                v.j = (matrix.up.j + matrix.left.k) / s;
+                v.k = 0.25f * s;
+            }
+        }
+
+        if (w < 0.0f) {
+            w = -w;
+            v.i = -v.i;
+            v.j = -v.j;
+            v.k = -v.k;
+        }
+    }
 }

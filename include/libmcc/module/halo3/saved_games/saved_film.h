@@ -10,23 +10,30 @@
 
 namespace libmcc::halo3 {
 #pragma pack(push, 1)
+    struct s_blffile_saved_game_file {
+        s_blf_chunk_start_of_file start_of_file_chunk;
+        s_blf_chunk_content_header content_header_chunk;
+    };
+
+    struct s_blf_chunk_saved_film_header : s_blf_header {
+        // length_in_ticks
+        char unknown_0[140];
+        int length_in_ticks;
+        char unknown_1[132];
+        game_options game_options;
+    };
+
+    static_assert(sizeof(s_blf_chunk_saved_film_header) == 0xFC80);
+
+    struct s_blf_chunk_saved_film_data : s_blf_header {
+    };
+
     struct s_blf_saved_film : s_blffile_saved_game_file {
-        struct s_blf_chunk_saved_film_header : s_blf_header {
-            // length_in_ticks
-            char unknown_0[140];
-            int length_in_ticks;
-            char unknown_1[132];
-            game_options game_options;
-        };
-
-        struct s_blf_chunk_saved_film_data : s_blf_header {
-
-        };
-
         s_blf_chunk_author author_chunk;
-        s_blf_chunk_saved_film_header saved_film_header_chunk; // 396
+        s_blf_chunk_saved_film_header saved_film_header_chunk;
         s_blf_chunk_saved_film_data saved_film_data_chunk;
     };
+
 
     static_assert(sizeof(s_blf_saved_film) == 65044);
 #pragma pack(pop)
@@ -34,13 +41,14 @@ namespace libmcc::halo3 {
     struct c_saved_film {
         int initialized;
         s_blf_saved_film film_data;
-        int __unknown1;
-        int __unknown2;
+        int : 32;
+        int : 32;
+        int : 32;
         int current_tick;
         c_async_buffer_set async_buffer_set; // 65064
         s_file_reference file_reference; // 65240
-        int __unknown4;
-        int __unknown5; // 65524
+        int : 32;
+        int : 32;
     };
 
     static_assert(sizeof(c_saved_film) == 0xFFF8);

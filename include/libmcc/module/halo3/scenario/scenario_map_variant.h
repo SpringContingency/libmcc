@@ -1,56 +1,12 @@
 #pragma once
 
-#include "./scenario_definitions.h"
-#include "../../../scenario/scenario_map_id.h"
 #include "../objects/objects.h"
+#include "./scenario_definitions.h"
+#include "../saved_games/saved_game_files.h"
+#include "../../../scenario/scenario_map_id.h"
+#include "../../../scenario/scenario_map_variant.h"
 
 namespace libmcc::halo3 {
-    enum e_saved_game_file_type : uint32_t {
-        _saved_game_file_type_personal = 0x0,
-        _saved_game_file_type_ctf = 0x1,
-        _saved_game_file_type_slayer = 0x2,
-        _saved_game_file_type_oddball = 0x3,
-        _saved_game_file_type_king = 0x4,
-        _saved_game_file_type_juggernaut = 0x5,
-        _saved_game_file_type_territories = 0x6,
-        _saved_game_file_type_assault = 0x7,
-        _saved_game_file_type_infection = 0x8,
-        _saved_game_file_type_vip = 0x9,
-        _saved_game_file_type_usermap = 0xA,
-        _saved_game_file_type_film = 0xB,
-        _saved_game_file_type_clip = 0xC,
-        _saved_game_file_type_screenshot = 0xD,
-        k_saved_game_file_type_count = 0xE,
-        _saved_game_file_type_none = 0xFFFFFFFF,
-      };
-
-    struct s_saved_game_item_metadata {
-        uint64_t unique_id;
-        wchar_t name[16];
-        char description[128];
-        char author[16];
-        e_saved_game_file_type file_type;
-        bool author_is_xuid_online;
-        char : 8;
-        char : 8;
-        char : 8;
-        uint64_t author_id;
-        uint64_t size_in_bytes;
-        uint64_t date;
-        int length_seconds;
-        int campaign_id;
-        int map_id;
-        int game_engine_type;
-        int campaign_difficulty;
-        byte campaign_insertion_point;
-        bool campaign_survival_enabled;
-        char : 8;
-        char : 8;
-        uint64_t game_id;
-    };
-
-    static_assert(sizeof(s_saved_game_item_metadata) == 248);
-
     struct c_object_identifier {
         int m_unique_id;
         uint16_t m_origin_bsp_index;
@@ -198,6 +154,7 @@ namespace libmcc::halo3 {
         uint16_t m_object_type_start_index[k_object_types_count];
         s_variant_quota m_quotas[k_variant_quota_maximum_count];
         int simulation_entities[k_simulation_entity_maximum_count];
+        int : 32;
         s_scenario_map_id map_id;
     };
 
@@ -205,3 +162,108 @@ namespace libmcc::halo3 {
 
     typedef s_map_variant c_map_variant;
 }
+
+// mvar
+namespace libmcc::halo3 {
+    struct content_header {
+        uint64_t id;
+        wchar_t name[16];
+        char description[128];
+        char author[16];
+        e_game_engine_type game_type_menu_order;
+        int is_user_valid;
+        char author_xuid[8];
+        uint64_t size;
+        uint64_t timestamp;
+        int : 32;
+        int campaign_id;
+        int map_id;
+        e_game_engine_type game_type_menu;
+        CampaignDifficultyLevel game_difficulty;
+        // padding byte
+        // padding byte
+        int campaign_insertion_index;
+        int is_survival;
+        int game_id;
+     };
+
+    struct game_engine_base_variant {
+
+    };
+
+    struct map_variant_properties {
+        uint16_t engine_flags;
+        byte object_flags;
+        byte team_affilation;
+        byte shared_storage;
+        byte respawn_time;
+        byte object_type;
+        byte zone_shape;
+        real zone_radius_width;
+        real zone_depth;
+        real zone_top;
+        real zone_bottom;
+    };
+
+    struct map_variant_placement {
+        uint16_t placement_flags;                
+        uint16_t unknown02;
+        __int32 object_index;               
+        __int32 editor_object_index;        
+        __int32 budget_index;               
+        real_vector3d position;
+        real_vector3d right_vector;
+        real_vector3d up_vector;
+        __int32 unknown34;                  
+        __int32 unknown38;
+        map_variant_properties properties;  
+    };
+
+    struct map_variant_budget_entry {
+        __int32 tag_index;
+        byte runtime_min;
+        byte runtime_max;
+        byte count_on_map;
+        byte design_time_max;
+        real cost;
+    };
+
+#pragma pack(push, 1)
+    struct s_blf_chunk_map_variant : s_blf_header {
+        content_header header;
+        uint16_t unknown_f8;
+        uint16_t placement_count;
+        uint16_t used_placements_count;
+        uint16_t budget_entry_count;
+        __int32 map_id;
+        real_bounds world_bounds_x;
+        real_bounds world_bounds_y;
+        real_bounds world_bounds_z;
+        __int32 content_type;
+        real max_budget;
+        real current_budget;
+        __int32 unknown128;
+        __int32 unknown12C;
+        map_variant_placement placements[640];
+        uint16_t scenario_indices[16];
+        map_variant_budget_entry budget[256];
+        char unused[320];
+    };
+
+    struct s_blffile_map_variant {
+        s_blf_chunk_start_of_file start_of_file_chunk;
+        s_blf_chunk_author author_chunk;
+        s_blf_chunk_map_variant map_variant_chunk;
+        s_blf_chunk_end_of_file end_of_file_chunk;
+        s_blf_chunk_fsm fsm_chunk;
+    };
+
+#pragma pack(pop)
+
+    class c_map_variant_interface : public libmcc::i_scenario_map_variant {
+
+    private:
+        s_map_variant m_map_variant;
+    };
+}
+
