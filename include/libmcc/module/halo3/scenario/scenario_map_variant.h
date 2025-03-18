@@ -163,6 +163,15 @@ namespace libmcc::halo3 {
     typedef s_map_variant c_map_variant;
 }
 
+namespace libmcc::halo3 {
+    class c_scenario_map_variant : public i_scenario_map_variant {
+    public:
+		s_map_variant m_map_variant;
+        int blffile_map_variant_size;
+        char blffile_map_variant_data[0xE13D];
+    };
+}
+
 // mvar
 namespace libmcc::halo3 {
     struct content_header {
