@@ -1,7 +1,5 @@
 #pragma once
 
-#include "../game/game_options.h"
-
 namespace libmcc {
 	union s_scenario_map_variant_storage {
 		char scenario_map_variant_data[59392];
@@ -17,6 +15,7 @@ namespace libmcc {
 	};
 
 	class i_scenario_map_variant {
+	public:
 		virtual void free() = 0;
 		virtual wchar_t* get_name() = 0;
 		virtual wchar_t* set_name(const wchar_t* name) = 0;
@@ -24,9 +23,9 @@ namespace libmcc {
 		virtual wchar_t* set_description(const wchar_t* description) = 0;
 		virtual wchar_t* get_author(s_author_data* author_data) = 0;
 		virtual wchar_t* set_author(const s_author_data* author_data) = 0;
-		virtual void set_map_variant(s_game_options* game_options) = 0;
-		virtual bool get_map_variant_file(char** buf, uint32_t* len) = 0;
-		virtual bool get_map_variant_file_2(char** buf, uint32_t* len) = 0;
+		virtual void set_map_variant(struct s_game_options* game_options) = 0;
+		virtual bool get_map_variant_file(const char** buf, uint32_t* len) = 0;
+		virtual bool get_map_variant_file_2(const char** buf, uint32_t* len) = 0;
 		virtual bool is_built_in() = 0;
 		virtual bool is_built_in_2() = 0;
 		virtual void unknown() = 0;
