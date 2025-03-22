@@ -1,5 +1,7 @@
 #pragma once
 
+#include <Xinput.h>
+
 namespace libmcc {
     struct s_keyboard_state {
         bool key_down[256];
@@ -29,6 +31,9 @@ namespace libmcc {
     static_assert(sizeof(s_mouse_state) == 0x1C);
 
     struct s_gamepad_state {
+        constexpr s_gamepad_state();
+        constexpr s_gamepad_state(const XINPUT_STATE& state);
+
         union {
             struct {
                 bool dpad_up : 1;
@@ -72,4 +77,17 @@ namespace libmcc {
         short left_motor_speed;
         short right_motor_speed;
     };
+}
+
+namespace libmcc {
+    constexpr s_gamepad_state::s_gamepad_state() {}
+    constexpr s_gamepad_state::s_gamepad_state(const XINPUT_STATE& state) {
+        buttons.value = state.Gamepad.wButtons;
+		leftTrigger = state.Gamepad.bLeftTrigger;
+		rightTrigger = state.Gamepad.bRightTrigger;
+		thumbLX = state.Gamepad.sThumbLX;
+		thumbLY = state.Gamepad.sThumbLY;
+        thumbRX = state.Gamepad.sThumbRX;
+        thumbRY = state.Gamepad.sThumbRY;
+    }
 }

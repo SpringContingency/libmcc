@@ -105,7 +105,7 @@ namespace libmcc::halo3 {
     };
 
     inline s_saved_film_globals* saved_film_globals() {
-        return REF<s_saved_film_globals>(_data_saved_film_globals);
+        return REF<s_saved_film_globals>(s_data_offset_table::saved_film_globals);
     }
 
 };

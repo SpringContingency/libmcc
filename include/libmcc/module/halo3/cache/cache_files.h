@@ -219,11 +219,11 @@ namespace libmcc::halo3 {
     };
 
 	inline s_cache_file_tags_name** g_cache_file_tags_name() {
-		return REF<s_cache_file_tags_name*>(_data_g_cache_file_tags_name);
+		return REF<s_cache_file_tags_name*>(s_data_offset_table::g_cache_file_tags_name);
 	}
 
     inline s_cache_file_globals* g_cache_file_globals() {
-        return REF<s_cache_file_globals>(_data_g_cache_file_globals);
+        return REF<s_cache_file_globals>(s_data_offset_table::g_cache_file_globals);
     }
 }
 

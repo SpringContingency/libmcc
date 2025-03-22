@@ -216,7 +216,7 @@ namespace libmcc {
     constexpr real_vector3d::real_vector3d(const real_point3d& p0, const real_point3d& p1) : i(p1.x - p0.x), j(p1.y - p0.y), k(p1.z - p0.z) {}
     constexpr real_vector3d::real_vector3d(const real_vector3d& up, const real_vector3d& forward) : i(up.j* forward.k - up.k * forward.j), j(up.k* forward.i - up.i * forward.k), k(up.i* forward.j - up.j * forward.i) {}
     constexpr double real_vector3d::magnitude_squared3d() const { return i * i + j * j + k * k; }
-    inline real real_vector3d::magnitude3d() const { return std::sqrt(magnitude_squared3d()); }
+    inline real real_vector3d::magnitude3d() const { return std::sqrtf(magnitude_squared3d()); }
 
     constexpr real_euler_angles2d::real_euler_angles2d() {}
     constexpr real_euler_angles2d::real_euler_angles2d(angle yaw, angle pitch) : yaw(yaw), pitch(pitch) {}

@@ -8,14 +8,52 @@
 
 namespace libmcc {
 	typedef int string_id;
+
+	typedef int s_big_endian_int;
+
+	typedef int s_little_endian_int;
+
+	typedef std::pair<uintptr_t, const char*> s_offset_table_item;
+
+	template <typename Ret, typename ...Args>
+	inline Ret INVOKE(HMODULE hModule, const s_offset_table_item& func, Args ...args) {
+		return reinterpret_cast<Ret(__fastcall*)(...)>(reinterpret_cast<uintptr_t>(hModule) + func.first)(args...);
+	}
+
+	template <typename T>
+	inline T* REF(HMODULE hModule, const s_offset_table_item& data) {
+		return reinterpret_cast<T*>(reinterpret_cast<uintptr_t>(hModule) + data.first);
+	}
+
+	class i_unknown {
+	public:
+		virtual void release() = 0;
+	};
+
+	enum e_unknown {};
+
+	template<typename T = int, typename E = e_unknown>
+	struct s_flags {
+		bool bit_test(T position) {
+			return flags & value;
+		}
+
+		void bit_set(T position, bool value) {
+			if (value) {
+				flags |= value;
+			} else {
+				flags &= ~value;
+			}
+		}
+
+		T n;
+	};
 }
+
+#define byte_swap(x) _byteswap_ulong(x)
+
+#define MAKE_OFFSET_TABLE_ITEM(name, offset, aob) constexpr static const s_offset_table_item name = s_offset_table_item(offset, aob)
 
 #define DEF_PVF(ret, name, ...) virtual ret __fastcall name(__VA_ARGS__) = 0
 
 #define DEF_VFT(ret, name, ...) ret (__fastcall* name)(__VA_ARGS__)
-
-typedef int s_big_endian_int;
-typedef int s_little_endian_int;
-
-#define byte_swap(x) _byteswap_ulong(x)
-

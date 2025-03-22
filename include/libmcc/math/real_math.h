@@ -7,7 +7,7 @@ namespace libmcc {
     typedef float real;
     typedef float angle;
 
-    constexpr real RAD_TO_DEG = 180.0f / M_PI;
+    constexpr real RAD_TO_DEG = 180.0f * M_1_PI;
     constexpr real DEG_TO_RAD = M_PI / 180.0f;
 
     union real_vector3d;

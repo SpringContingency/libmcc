@@ -189,7 +189,7 @@ namespace libmcc::halo3 {
     };
 
 	inline s_thread_local_storage* g_thread_local_storage() {
-		return reinterpret_cast<s_thread_local_storage*>(get_tls(g_tls_index));
+		return reinterpret_cast<s_thread_local_storage*>(get_tls(get_tls_index(hModule)));
 	}
 
     inline bool game_in_progress() {

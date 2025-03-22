@@ -52,6 +52,6 @@ namespace libmcc::mcc {
 	static_assert((sizeof(s_game_data) == 0x2C2F8));
 
 	inline s_game_data** g_game_data() {
-		return REF<s_game_data*>(_data_p_game_data);
+		return REF<s_game_data*>(s_data_offset_table::p_game_data);
 	}
 }
