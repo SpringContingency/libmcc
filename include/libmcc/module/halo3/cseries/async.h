@@ -40,20 +40,4 @@ namespace libmcc::halo3 {
     };
 
     static_assert(sizeof(c_async_buffer_set) == 176);
-
-    typedef char long_string[256];
-
-    struct file_reference_info {
-        uint32_t signature;
-        uint16_t flags;
-        uint16_t location;
-        long_string path;
-    };
-
-    struct s_file_reference : file_reference_info {
-        s_file_handle handle;
-        int position;
-    };
-
-    static_assert(sizeof(s_file_reference) == 280);
 }

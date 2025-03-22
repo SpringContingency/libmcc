@@ -145,7 +145,7 @@ namespace libmcc {
 		__int64 un_3; // m_HostSAddr?
 		s_game_engine_variant game_variant;
 		s_game_options_unknown un_4;
-		s_scenario_map_variant map_variant;
+		s_scenario_map_variant_storage map_variant;
 		s_game_options_unknown un_5;
 		int un_6;
 		int padding_1;

@@ -57,7 +57,7 @@ namespace libmcc::halo3 {
         char : 8;
         uint64_t author_id;
         uint64_t size_in_bytes;
-        uint64_t date;
+        __time64_t date;
         int length_seconds;
         int campaign_id;
         int map_id;
