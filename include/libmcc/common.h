@@ -35,14 +35,14 @@ namespace libmcc {
 	template<typename T = int, typename E = e_unknown>
 	struct s_flags {
 		bool bit_test(T position) {
-			return flags & value;
+			return n & (1 << position);
 		}
 
 		void bit_set(T position, bool value) {
 			if (value) {
-				flags |= value;
+				n |= (1 << position);
 			} else {
-				flags &= ~value;
+				n &= ~(1 << position);
 			}
 		}
 
