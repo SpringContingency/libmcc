@@ -41,9 +41,9 @@ namespace libmcc {
 	typedef errno_t(__fastcall* t_expf_set_library_settings)(const s_language_settings*);
 
 	struct s_module_info {
-		e_module module;
-		int last_error;
-		HMODULE hModule;
+		e_module module_index;
+		int error_code;
+		HMODULE module_handle;
 		t_expf_create_data_access create_data_access;
 		i_data_access* data_access;
 	};

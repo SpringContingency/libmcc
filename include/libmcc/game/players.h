@@ -2,7 +2,7 @@
 
 #include "../math/math.inl"
 
-#include "./player_mapping.h"
+#include "../input/input.h"
 #include "./player_loadouts.h"
 #include "./player_customization.h"
 
@@ -16,6 +16,10 @@ namespace libmcc {
 		k_local_player_count,
 		k_local_player_none = -1,
 	};
+
+    union s_game_specific_storage {
+        char __data[0x100];
+    };
 
     struct s_player_profile {
         bool subtitle_setting; // 0x0
@@ -103,7 +107,7 @@ namespace libmcc {
 
         s_player_loadout loadout_slots[5]; // 0x1E4
 
-        char game_specific[0x100]; // 0x310
+        s_game_specific_storage game_specific; // 0x310
         float mouse_sensitivity; // 0x410
         bool mouse_smoothing; // 0x414
         bool mouse_acceleration; // 0x415
