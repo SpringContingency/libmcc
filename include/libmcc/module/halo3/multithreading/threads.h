@@ -12,7 +12,7 @@ namespace libmcc::halo3 {
     struct s_thread_local_storage {
         uint64_t : 64; // 0x00
         uint64_t : 64; // 0x08
-        uint64_t : 64; // 0x10
+        void* player_data; // 0x10
         int g_registered_thread_index; // 0x18
         s_game_engine_globals* game_engine_globals; // 0x20
         uint64_t : 64; // 0x28
@@ -37,7 +37,7 @@ namespace libmcc::halo3 {
         s_player_control_globals* player_control_globals; // 0xC0
         game_time_globals_struct* game_time_globals; // 0xC8
         uint64_t : 64; // 0xD0
-        uint64_t : 64; // 0xD8
+        void* g_campaign_metagame_globals; // 0xD8
         uint64_t : 64; // 0xE0
         uint64_t : 64; // 0xE8
         uint64_t : 64; // 0xF0
