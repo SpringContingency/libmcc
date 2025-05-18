@@ -58,13 +58,13 @@ namespace libmcc::halo3 {
 	static_assert(sizeof(s_kerning_pair) == 2);
 
 	struct s_font_character {
-		__int16 width;
+		__int16 abcC_abcB;
 		__int16 : 16;
 		int packed_pixel_count;
-		__int16 bitmap_height;
-		__int16 bitmap_width;
-		__int16 x;
-		__int16 ascender;
+		__int16 width;
+		__int16 height;
+		__int16 abcA;
+		__int16 tmAscent;
 	};
 
 	static_assert(sizeof(s_font_character) == 16);

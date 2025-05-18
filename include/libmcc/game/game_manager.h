@@ -8,6 +8,8 @@
 #include "./game_event_manager.h"
 #include "./game_engine_variant.h"
 
+#include "../text/font_cache.h"
+
 #include "../scenario/scenario_map_id.h"
 #include "../scenario/scenario_map_variant.h"
 
@@ -100,70 +102,76 @@ namespace libmcc {
 
         virtual bool __fastcall get_ugc_id(s_scenario_map_id* map_id, char* buf, size_t len) = 0;
 
+        // 0x198
         virtual bool __fastcall get_game_setting(e_game_setting setting, bool* v1, uint64_t* v2) = 0;
 
+		// 0x1A0
         virtual bool __fastcall validate_cache_file(int a2) = 0;
 
+		// 0x1A8
         virtual uintptr_t __fastcall sub_1401E6664() = 0;
+
+		// 0x1B0
         virtual uintptr_t __fastcall sub_1401E66C4() = 0;
+        
+		// 0x1B8
         virtual uintptr_t __fastcall sub_1401E67A8() = 0;
+
+		// 0x1C0
         virtual uintptr_t __fastcall sub_1401E67D4() = 0;
 
+		// 0x1C8
         virtual bool __fastcall get_game_mode(int a2, unsigned int a3, wchar_t* buf, size_t len) = 0;
+
+		// 0x1D0
         virtual bool __fastcall get_subtitle(const char* sound_tag_name, const char* prefix, int index, wchar_t* buf, size_t len) = 0;
 
+		// 0x1D8
         virtual bool __fastcall font__() = 0;
+        
+		// 0x1E0
         virtual bool __fastcall font___() = 0;
+
+		// 0x1E8
         virtual bool __fastcall font_test_string(
             const wchar_t* str, 
-            int font_id,
+            int font_size,
             float scale, 
             const char* font_name
         ) = 0;
 
-        struct s_font_character {
-            short : 16;
-            float _;
-            short : 16;
-            short : 16;
-            __int16 bitmap_height;
-            __int16 bitmap_width;
-            __int16 ascender;
-            __int16 begin_x;
-            __int16 end_x;
-            short : 16;
-            char : 8;
-            char : 8;
-        };
-
+        // 0x1F0
         virtual bool __fastcall font_precache_character(
             wchar_t c,
             s_font_character* character,
-            int font_id,
+            int font_size,
             float scale,
             const char* font_name
         ) = 0;
 
-        virtual bool __fastcall font_test__(int) = 0;
+        // 0x1F8
+        virtual ID3D11ShaderResourceView* __fastcall font_get_texture(
+            int texture_id
+        ) = 0;
 
         virtual bool __fastcall font_test_char(
             wchar_t c, 
-            int font_id,
+            int font_size,
             float scale, 
             const char* font_name
         ) = 0;
 
         virtual int __fastcall font_get_kerning_pair_offset(
-            wchar_t c,
-            int,
-            int font_id,
+            wchar_t left,
+            wchar_t right,
+            int font_size,
             float scale,
 			const char* font_name
         ) = 0;
 
         virtual bool __fastcall font_set__(
             wchar_t c,
-            int font_id,
+            int font_size,
             float scale,
             const char* font_name,
             int len,
@@ -173,8 +181,8 @@ namespace libmcc {
             int size
         ) = 0;
 
-        virtual bool __fastcall font_get_height(
-            int font_id, 
+        virtual bool __fastcall font_set_selection (
+            int size, 
             float scale, 
             const char* font_name, 
             uint16_t* ascender,
@@ -185,17 +193,28 @@ namespace libmcc {
 
         virtual float __fastcall sub_1401E6154() = 0;
         virtual void __fastcall sub_1401E615C() = 0;
-        virtual uintptr_t __fastcall sub_1401E3EF0() = 0;
-        virtual void __fastcall draw_player_icon(
+        virtual ID3D11ShaderResourceView* __fastcall get_player_skin(
+            uint32_t a1,
+            uint32_t a2
+        ) = 0;
+        virtual void __fastcall draw_player_emblem(
             XUID xuid,
             int,
             float x0,
 			float x1,
 			float y0,
-			float y1
+			float y1,
+            float
         ) = 0;
-        virtual uintptr_t __fastcall sub_1401E4418() = 0;
-        virtual uintptr_t __fastcall sub_1401E44C8() = 0;
+        virtual ID3D11ShaderResourceView* __fastcall get_player_emblem(
+            XUID xuid
+        ) = 0;
+        virtual void __fastcall get_player_emblem_attribute(  
+            XUID xuid,
+			uint32_t* a2,
+			uint32_t* a3,
+			uint32_t* a4
+        ) = 0;
         virtual bool __fastcall get_player_weapon_offset(
             datum_index index,
             e_local_player player,
@@ -229,9 +248,9 @@ namespace libmcc {
         virtual uintptr_t __fastcall sub_1401E7618() = 0;
         virtual uintptr_t __fastcall sub_1401E763C() = 0;
         virtual uintptr_t __fastcall sub_1401E7668() = 0;
-        virtual uintptr_t __fastcall sub_1401E7684() = 0;
-        virtual uintptr_t __fastcall sub_1401E7718() = 0;
-        virtual uintptr_t __fastcall sub_1401E5880() = 0;
+        virtual bool __fastcall chud_(uint64_t, float*, float*, float*) = 0;
+        virtual bool __fastcall chud__(uint64_t, void*) = 0;
+        virtual uint32_t __fastcall chud_blend_color(e_local_player player, uint32_t rgba) = 0;
         virtual uintptr_t __fastcall sub_1401E77DC() = 0;
         virtual uintptr_t __fastcall sub_1401E77C8() = 0;
         virtual uintptr_t __fastcall ___() = 0;

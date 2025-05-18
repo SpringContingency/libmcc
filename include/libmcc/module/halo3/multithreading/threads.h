@@ -52,7 +52,7 @@ namespace libmcc::halo3 {
         uint64_t : 64; // 0x138
         uint64_t : 64; // 0x140
         uint64_t : 64; // 0x148
-        uint64_t : 64; // 0x150
+        void* g_font_cache_globals; // 0x150
         uint64_t : 64; // 0x158
         uint64_t : 64; // 0x160
         uint64_t : 64; // 0x168
