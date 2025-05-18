@@ -227,40 +227,44 @@ namespace libmcc {
 
     constexpr real_quaternion::real_quaternion() {}
     constexpr real_quaternion::real_quaternion(const real_matrix3x3& matrix) {
-        float trace = matrix.forward.i + matrix.left.j + matrix.up.k;
+        double trace, r, s;
+
+        trace = matrix.forward.i + matrix.left.j + matrix.up.k;
+
         if (trace > 0.0f) {
-            float s = 0.5f / std::sqrt(trace + 1.0f);
-            w = 0.25f / s;
-            v.i = (matrix.up.j - matrix.left.k) * s;
-            v.j = (matrix.forward.k - matrix.up.i) * s;
-            v.k = (matrix.left.i - matrix.forward.j) * s;
+            r = std::sqrt(trace + 1.0);
+            s = 0.5 / r;
+
+            this->w = 0.5 * r;
+			this->i = (matrix.left.k - matrix.up.j) * s;
+			this->j = (matrix.up.i - matrix.forward.k) * s;
+			this->k = (matrix.forward.j - matrix.left.i) * s;
         } else {
-            if (matrix.forward.i > matrix.left.j && matrix.forward.i > matrix.up.k) {
-                float s = 2.0f * std::sqrt(1.0f + matrix.forward.i - matrix.left.j - matrix.up.k);
-                w = (matrix.up.j - matrix.left.k) / s;
-                v.i = 0.25f * s;
-                v.j = (matrix.forward.j + matrix.left.i) / s;
-                v.k = (matrix.forward.k + matrix.up.i) / s;
-            } else if (matrix.left.j > matrix.up.k) {
-                float s = 2.0f * std::sqrt(1.0f + matrix.left.j - matrix.forward.i - matrix.up.k);
-                w = (matrix.forward.k - matrix.up.i) / s;
-                v.i = (matrix.forward.j + matrix.left.i) / s;
-                v.j = 0.25f * s;
-                v.k = (matrix.up.j + matrix.left.k) / s;
-            } else {
-                float s = 2.0f * std::sqrt(1.0f + matrix.up.k - matrix.forward.i - matrix.left.j);
-                w = (matrix.left.i - matrix.forward.j) / s;
-                v.i = (matrix.forward.k + matrix.up.i) / s;
-                v.j = (matrix.up.j + matrix.left.k) / s;
-                v.k = 0.25f * s;
+            int x = matrix.left.j > matrix.forward.i;
+
+            if (matrix.up.k > matrix.n[x][x]) {
+                x = 2;
             }
+
+            int y = (x + 1) % 3;
+            int z = (x + 2) % 3;
+
+            trace = matrix.n[x][x] - matrix.n[y][y] - matrix.n[z][z];
+
+            r = std::sqrt(trace + 1.0);
+            s = 0.5 / r;
+
+            this->n[x] = 0.5 * r;
+            this->n[y] = (matrix.n[x][y] + matrix.n[y][x]) * s;
+            this->n[z] = (matrix.n[z][x] + matrix.n[x][z]) * s;
+            this->w = (matrix.n[y][z] - matrix.n[z][y]) * s;
         }
 
-        if (w < 0.0f) {
-            w = -w;
-            v.i = -v.i;
-            v.j = -v.j;
-            v.k = -v.k;
+        if (this->w < 0.0f) {
+            this->w = -this->w;
+            this->i = -this->i;
+            this->j = -this->j;
+            this->k = -this->k;
         }
     }
 }

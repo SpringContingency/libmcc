@@ -11,7 +11,7 @@ namespace libmcc {
     constexpr real DEG_TO_RAD = M_PI / 180.0f;
 
     union real_vector3d;
-    struct real_matrix3x3;
+    union real_matrix3x3;
 
     union real_point2d {
         constexpr real_point2d();
@@ -94,12 +94,15 @@ namespace libmcc {
         real yaw, pitch, roll;
     };
 
-    struct real_quaternion {
+    union real_quaternion {
         constexpr real_quaternion();
         constexpr real_quaternion(const real_matrix3x3& matrix);
 
-        real_vector3d v;
-        real w;
+        struct {
+            real i, j, k, w;
+        };
+
+        real n[4];
     };
 
     struct real_orientation {

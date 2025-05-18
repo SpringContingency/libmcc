@@ -3,14 +3,18 @@
 #include "./real_math.h"
 
 namespace libmcc {
-    struct real_matrix3x3 {
+    union real_matrix3x3 {
         real_matrix3x3() {}
         real_matrix3x3(const real_vector3d& forward, const real_vector3d& up, const real_vector3d& left) : forward(forward), left(left), up(up) {}
         real_matrix3x3(const real_vector3d& forward, const real_vector3d& up) : forward(forward), left(up, forward), up(up) {}
 
-        real_vector3d forward;
-        real_vector3d left;
-        real_vector3d up;
+        struct {
+            real_vector3d forward;
+            real_vector3d left;
+            real_vector3d up;
+        };
+
+        real n[3][3];
     };
 
     struct real_matrix4x3 {
