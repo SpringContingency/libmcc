@@ -1,5 +1,7 @@
 #pragma once
 
+#include "native.h"
+
 namespace libmcc::halo1 {
     namespace ds {class BIT_STREAM {};}
 
@@ -45,8 +47,8 @@ namespace libmcc::halo1 {
         virtual void Destroy(unsigned int *) = 0;
         virtual void Copy(const unsigned int *, unsigned int *) = 0;
         virtual void CopyObj(const void *, unsigned int *) = 0;
-        virtual void *GetPtr(unsigned int *) = 0;
-        virtual const void *GetPtr(const unsigned int *) const = 0;
+        virtual void *GetPtr(dsDATA*) = 0;
+        virtual const void *GetPtr(const dsDATA*) const = 0;
         virtual int IsFunc(const dsDATA *, dsSTRID) = 0;
         virtual int IsProperty(const dsDATA *, dsSTRID) = 0;
         virtual int CallFunc(dsSTRID, dsDATA *, dsDATA *, int, dsDATA *) = 0;
@@ -68,5 +70,19 @@ namespace libmcc::halo1 {
         virtual dsTSTRING<char> *GetDbgString(dsTSTRING<char> *result, const unsigned int *) = 0;
         virtual int GetId() = 0;
         virtual ~dsDATA_TYPE() = 0;
+    };
+
+    struct dsSTATE_MGR {
+        void SetState(int id, const dsDATA* data) {
+			return INVOKE<void>(s_function_offset_table::dsSTATE_MGR__SetState, this, id, data);
+        }
+
+		int RegisterState(const char* id, bool isToggleEventOnChange) {
+			return INVOKE<int>(s_function_offset_table::dsSTATE_MGR__RegisterState, this, id, isToggleEventOnChange);
+		}
+
+		const dsDATA* GetState(int id) {
+			return INVOKE<const dsDATA*>(s_function_offset_table::dsSTATE_MGR__GetState, this, id);
+		}
     };
 }

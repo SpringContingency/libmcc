@@ -1,9 +1,8 @@
 #pragma once
 
-#include <cstdint>
-
 namespace libmcc {
-	typedef uint64_t XUID;
+	typedef unsigned long long XUID;
+
 
 	struct s_xdk_user {
 		void* unknown_0;

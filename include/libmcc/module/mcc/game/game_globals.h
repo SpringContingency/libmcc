@@ -7,19 +7,19 @@
 namespace libmcc::mcc {
     struct s_game_globals : libmcc::s_game_globals {
         static s_game_globals_states* game_globals_states() {
-            return REF<s_game_globals_states>(_data_game_globals_states);
+            return REF<s_game_globals_states>(s_data_offset_table::game_globals_states);
         }
 
         int* state() {
-            return reinterpret_cast<int*>(reinterpret_cast<uintptr_t>(this) + 180280);
+            return reinterpret_cast<int*>(__data + 180280);
         }
 
         LARGE_INTEGER* enter_time () {
-            return reinterpret_cast<LARGE_INTEGER*>(reinterpret_cast<uintptr_t>(this) + 180288);
+            return reinterpret_cast<LARGE_INTEGER*>(__data + 180288);
         }
 
         bool* paused() {
-            return reinterpret_cast<bool*>(reinterpret_cast<uintptr_t>(this) + 180324);
+            return reinterpret_cast<bool*>(__data + 180324);
         }
 
         union {
@@ -33,13 +33,13 @@ namespace libmcc::mcc {
                 e_module last_module;
             };
 
-            char raw[0x2C0E8];
-        } data;
+            char __data[0x2C0E8];
+        };
     };
 
     static_assert(sizeof(s_game_globals) == 0x2C0E8);
 
     inline s_game_globals** g_game_globals() {
-        return REF<s_game_globals*>(_data_p_game_globals);
+        return REF<s_game_globals*>(s_data_offset_table::p_game_globals);
     }
 }

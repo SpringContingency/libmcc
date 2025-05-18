@@ -1,5 +1,8 @@
 #pragma once
 
+#include "./bitmaps/bitmaps.h"
+#include "./text/font_package_cache.h"
+
 #include "./render/render_debug_structure.h"
 #include "./rasterizer/rasterizer.h"
 #include "./visibility/visibility.h"

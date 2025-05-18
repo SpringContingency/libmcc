@@ -157,6 +157,6 @@ namespace libmcc::halo3 {
     static_assert(sizeof(scenario_definition) == 0x780);
 
     inline scenario_definition* global_scenario() {
-        return *REF<scenario_definition*>(_data_global_scenario);
+        return *REF<scenario_definition*>(s_data_offset_table::global_scenario);
     }
 }

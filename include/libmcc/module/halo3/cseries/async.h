@@ -1,12 +1,9 @@
 #pragma once
 
+#include "../../../common.h"
 #include "../tag_files/files.h"
 
 namespace libmcc::halo3 {
-    struct c_synchronized_long {
-        volatile int m_value;
-    };
-
     struct s_async_buffer {
         void *data;
         int data_allocation_size;

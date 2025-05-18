@@ -17,7 +17,8 @@ namespace libmcc::halo3 {
 
     struct s_blf_chunk_saved_film_header : s_blf_header {
         // length_in_ticks
-        char unknown_0[140];
+        char unknown_0[132];
+        uint64_t : 64;
         int length_in_ticks;
         char unknown_1[132];
         game_options game_options;
@@ -105,7 +106,7 @@ namespace libmcc::halo3 {
     };
 
     inline s_saved_film_globals* saved_film_globals() {
-        return REF<s_saved_film_globals>(_data_saved_film_globals);
+        return REF<s_saved_film_globals>(s_data_offset_table::saved_film_globals);
     }
 
 };

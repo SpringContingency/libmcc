@@ -1,0 +1,21 @@
+#pragma once
+
+#include "../../common.h"
+
+namespace libmcc::halo2 {
+	inline HMODULE hModule;
+
+	template <typename Ret, typename ...Args>
+	inline Ret INVOKE(const s_offset_table_item& func, Args ...args) {
+		return libmcc::INVOKE<Ret>(hModule, func, args...);
+	}
+
+	template <typename T>
+	inline T* REF(const s_offset_table_item& data) {
+		return libmcc::REF<T>(hModule, data);
+	}
+
+    struct s_function_offset_table {
+        MAKE_OFFSET_TABLE_ITEM(game_options_verify, 0x6A6C80, nullptr);
+    };
+}

@@ -3,46 +3,39 @@
 #include "../../common.h"
 
 namespace libmcc::halo3 {
-	inline uintptr_t g_hModule;
-	inline int g_tls_index;
-
-	enum e_func;
-	enum e_data;
-
-	inline void Initialize(HMODULE hModule) {
-		g_hModule = reinterpret_cast<uintptr_t>(hModule);
-        g_tls_index = get_tls_index(hModule);
-	}
+	inline HMODULE hModule;
 
 	template <typename Ret, typename ...Args>
-	inline Ret INVOKE(e_func func, Args ...args) {
-		return reinterpret_cast<Ret(__fastcall*)(...)>(g_hModule + func)(args...);
+	inline Ret INVOKE(const s_offset_table_item& func, Args ...args) {
+		return libmcc::INVOKE<Ret>(hModule, func, args...);
 	}
 
 	template <typename T>
-	inline T* REF(e_data data) {
-		return reinterpret_cast<T*>(g_hModule + data);
+	inline T* REF(const s_offset_table_item& data) {
+		return libmcc::REF<T>(hModule, data);
 	}
 
-	enum e_func {
-		_func_main_thread_start = 0xA120,
-		_func_process_game_engine_globals_messages = 0xB468,
-		_func_c_rasterizer_set_explicit_shaders = 0x278C34,
-		_func_c_rasterizer_set_pixel_shader_constant = 0x2AF478,
-		_func_c_rasterizer_draw_primitive_up = 0x2A32B4,
-		_func_c_rasterizer_set_z_buffer_mode = 0x277F90,
+	struct s_function_offset_table {
+		MAKE_OFFSET_TABLE_ITEM(main_thread_start,								0xA120,		nullptr);
+		MAKE_OFFSET_TABLE_ITEM(process_game_engine_globals_messages,			0xB468,		nullptr);
+		MAKE_OFFSET_TABLE_ITEM(c_rasterizer_set_explicit_shaders,				0x278C34,	nullptr);
+		MAKE_OFFSET_TABLE_ITEM(c_rasterizer_set_pixel_shader_constant,			0x2AF478,	nullptr);
+		MAKE_OFFSET_TABLE_ITEM(c_rasterizer_draw_primitive_up,					0x2A32B4,	nullptr);
+		MAKE_OFFSET_TABLE_ITEM(c_rasterizer_set_z_buffer_mode,					0x277F90,	nullptr);
+		MAKE_OFFSET_TABLE_ITEM(c_network_session__can_accept_any_join_request,	0x11DF8,	"33 D2 F6 81 E4 41 00 00 01 74 ?? 44 8A 81 E4 41 00 00");
 	};
 
-	enum e_data {
-		_data_g_player_profile_globals = 0x2D3ED70,
-		_data_global_scenario = 0xA46A08,
-		_data_physical_memory_globals = 0xA4F170,
-		_data_saved_film_globals = 0x2127110,
-		_data_g_resource_runtime_manager = 0x8F4018,
-		_data_g_cache_file_tags_name = 0xA49148,
-		_data_g_cache_file_globals = 0x20A9040,
-		_data_g_current_cull_mode = 0x968DC0,
-		_data_g_cull_mode_changed = 0x8AC580,
-		_data_c_visible_items_m_item = 0x917C50,
+	struct s_data_offset_table {
+		MAKE_OFFSET_TABLE_ITEM(c_splitscreen_config__m_config_table,			0x8ADFC0,	nullptr);
+		MAKE_OFFSET_TABLE_ITEM(g_player_profile_globals,						0x2D3ED70,	nullptr);
+		MAKE_OFFSET_TABLE_ITEM(global_scenario,									0xA46A08,	nullptr);
+		MAKE_OFFSET_TABLE_ITEM(physical_memory_globals,							0xA4F170,	nullptr);
+		MAKE_OFFSET_TABLE_ITEM(saved_film_globals,								0x2127110,	nullptr);
+		MAKE_OFFSET_TABLE_ITEM(g_resource_runtime_manager,						0x8F4018,	nullptr);
+		MAKE_OFFSET_TABLE_ITEM(g_cache_file_tags_name,							0xA49148,	nullptr);
+		MAKE_OFFSET_TABLE_ITEM(g_cache_file_globals,							0x20A9040,	nullptr);
+		MAKE_OFFSET_TABLE_ITEM(g_current_cull_mode,								0x968DC0,	nullptr);
+		MAKE_OFFSET_TABLE_ITEM(g_cull_mode_changed,								0x8AC580,	nullptr);
+		MAKE_OFFSET_TABLE_ITEM(c_visible_items_m_item,							0x917C50,	nullptr);
 	};
 }

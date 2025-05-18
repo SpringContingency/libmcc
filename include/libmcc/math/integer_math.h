@@ -1,28 +1,26 @@
 #pragma once
 
-#include <cstdint>
-
 namespace libmcc {
     union short_point2d {
         struct {
-            uint16_t x, y;
+            short x, y;
         };
-        uint16_t n[2];
+        short n[2];
     };
 
     union rectangle2d {
         struct {
-            uint16_t y0;
-            uint16_t x0;
-            uint16_t y1;
-            uint16_t x1;
+            short y0;
+            short x0;
+            short y1;
+            short x1;
         };
         struct {
-            uint16_t top;
-            uint16_t left;
-            uint16_t bottom;
-            uint16_t right;
+            short top;
+            short left;
+            short bottom;
+            short right;
         };
-        uint16_t n[4];
+        short n[4];
     };
 }
