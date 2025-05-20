@@ -3,6 +3,7 @@
 #include "./files.h"
 #include "./tag_groups.h"
 #include "../memory/data.h"
+#include "tag_api_interop.h"
 
 namespace libmcc::halo3 {
     struct s_tag_reference {
@@ -63,6 +64,9 @@ namespace libmcc::halo3 {
         };
         int definition_address;
     };
+
+	template <typename T>
+	struct c_typed_tag_resource : s_tag_resource {};
 
     struct s_tag_resources_block {
         int count;

@@ -1,31 +1,22 @@
 #pragma once
 
+#include "../geometry/geometry_definitions.h"
+
 namespace libmcc::halo3 {
-    enum e_vertex_type : uint32_t {
-        _vertex_type_world = 0x0,
-        _vertex_type_rigid = 0x1,
-        _vertex_type_skinned = 0x2,
-        _vertex_type_particle_model = 0x3,
-        _vertex_type_flat_world = 0x4,
-        _vertex_type_flat_rigid = 0x5,
-        _vertex_type_flat_skinned = 0x6,
-        _vertex_type_screen = 0x7,
-        _vertex_type_debug = 0x8,
-        _vertex_type_transparent = 0x9,
-        _vertex_type_particle = 0xA,
-        _vertex_type_contrail = 0xB,
-        _vertex_type_light_volume = 0xC,
-        _vertex_type_simple_chud = 0xD,
-        _vertex_type_fancy_chud = 0xE,
-        _vertex_type_decorator = 0xF,
-        _vertex_type_tiny_position = 0x10,
-        _vertex_type_patchy_fog = 0x11,
-        _vertex_type_water = 0x12,
-        _vertex_type_ripple = 0x13,
-        _vertex_type_implicit = 0x14,
-        _vertex_type_beam = 0x15,
-        _vertex_type_dual_quat = 0x16,
-        k_vertex_type_count = 0x17,
+    struct c_rasterizer_vertex_buffer {
+        
+    };
+
+    struct c_rasterizer_index_buffer {
+        enum e_primitive_type : char {
+            _primitive_type_default, // D3D_PRIMITIVE_TOPOLOGY_POINTLIST 
+            _primitive_type_line_list, // D3D_PRIMITIVE_TOPOLOGY_LINELIST
+            _primitive_type_line_strip, // D3D_PRIMITIVE_TOPOLOGY_LINESTRIP 
+            _primitive_type_triangle_list, // D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST 
+            _primitive_type_triangle_fan, // D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST | 2 : D3D_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP
+            _primitive_type_triangle_strip, // D3D_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP
+            _primitive_type_quad_list, // D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST
+        };
     };
 
     enum e_transfer_vector_vertex_types : uint32_t {

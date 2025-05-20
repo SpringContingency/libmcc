@@ -3,6 +3,7 @@
 #include "../native.h"
 
 #include "./rasterizer_globals.h"
+#include "./rasterizer_vertex_definitions.h"
 
 namespace libmcc::halo3 {
     struct rasterizer_vertex_debug {
@@ -20,20 +21,6 @@ namespace libmcc::halo3 {
     inline int* g_cull_mode_changed() {
         return REF<int>(s_data_offset_table::g_cull_mode_changed);
     }
-
-    class c_rasterizer_index_buffer {
-    public:
-        enum e_primitive_type : int {
-            _primitive_type_point_list = 0x0,
-            _primitive_type_line_list = 0x1,
-            _primitive_type_list_strip = 0x2,
-            _primitive_type_triangle_list = 0x3,
-            _primitive_type_triangle_fan = 0x4,
-            _primitive_type_triangle_strip = 0x5,
-            _primitive_type_force_dword = 0x6,
-            k_primitive_type_count = 0x7,
-        };
-    };
 
     struct c_rasterizer {
         enum e_z_buffer_mode : int {
