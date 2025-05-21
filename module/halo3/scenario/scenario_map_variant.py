@@ -1,5 +1,6 @@
 from ctypes import c_uint
 
+from ..objects import *
 from ..saved_games import *
 from ....math import *
 from ....scenario import *
@@ -50,16 +51,15 @@ class s_variant_multiplayer_object_properties_definition(Structure):
     ]
 
 class s_variant_object_datum(Structure):
-    _pack_ = 8
     _fields_ = [
         ("flags", c_short),
         ("__unknown2", c_short),
         ("object_datum_index", c_int),
         ("editor_object_index", c_int),
         ("variant_quota_index", c_int),
-        ("position", real_rectangle3d),
-        ("forward", real_rectangle3d),
-        ("up", real_rectangle3d),
+        ("position", real_point3d),
+        ("forward", real_vector3d),
+        ("up", real_vector3d),
         ("parent_object_identifier", c_object_identifier),
         ("multiplayer_game_object_properties", s_variant_multiplayer_object_properties_definition)
     ]
@@ -97,8 +97,8 @@ class s_map_variant(Structure):
         ("m_built_in", c_bool),
         ("m_map_variant_checksum", c_uint),
         ("m_variant_objects", s_variant_object_datum * k_variant_object_maximum_count),
-        ("m_object_type_start_index", c_short * e_map_variant_palette.k_map_variant_palette_count),
+        ("m_object_type_start_index", c_short * e_object_type.k_object_types_count),
         ("m_quotas", s_variant_quota * k_variant_quota_maximum_count),
-        ("m_simulation_entities", c_int * k_simulation_entity_maximum_count),
+        ("simulation_entities", c_int * k_simulation_entity_maximum_count),
         ("map_id", s_scenario_map_id)
     ]

@@ -1,1 +1,1 @@
-from scenario_map_id import *
+from .scenario_map_id import *

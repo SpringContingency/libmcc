@@ -1,1 +1,1 @@
-from scenario_map_variant import *
+from .scenario_map_variant import *
