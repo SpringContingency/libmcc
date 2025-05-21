@@ -1,8 +1,7 @@
-from ctypes import c_uint, c_byte, Structure, c_int, c_short, c_bool
+from ctypes import c_uint
 
-from ....math.real_math import *
-from ....math.geometry import *
-from ..saved_games.saved_game_files import *
+from ..saved_games import *
+from ....math import *
 from ....scenario import *
 
 k_variant_object_maximum_count = 640
