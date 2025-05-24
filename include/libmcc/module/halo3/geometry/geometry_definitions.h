@@ -66,11 +66,19 @@ namespace libmcc::halo3 {
 
 	static_assert(sizeof(s_mesh) == 76);
 
+	typedef
+		c_typed_tag_interop<s_render_vertex_buffer_descriptor, c_rasterizer_vertex_buffer>
+		render_vertex_buffer_interop_definition;
+
+	typedef
+		c_typed_tag_interop<s_render_index_buffer_descriptor, c_rasterizer_index_buffer>
+		render_index_buffer_interop_definition;
+
 	struct s_render_geometry_api_resource {
-		c_typed_tag_block<c_typed_tag_interop<s_render_vertex_buffer_descriptor, c_rasterizer_vertex_buffer>> pc_vertex_buffers;
-		c_typed_tag_block<c_typed_tag_interop<s_render_index_buffer_descriptor, c_rasterizer_index_buffer>> pc_index_buffers;
-		c_typed_tag_block<c_typed_tag_interop<s_render_vertex_buffer_descriptor, c_rasterizer_vertex_buffer>> xenon_vertex_buffers;
-		c_typed_tag_block<c_typed_tag_interop<s_render_index_buffer_descriptor, c_rasterizer_index_buffer>> xenon_index_buffers;
+		c_typed_tag_block<render_vertex_buffer_interop_definition> pc_vertex_buffers;
+		c_typed_tag_block<render_index_buffer_interop_definition> pc_index_buffers;
+		c_typed_tag_block<render_vertex_buffer_interop_definition> xenon_vertex_buffers;
+		c_typed_tag_block<render_index_buffer_interop_definition> xenon_index_buffers;
 	};
 
 	static_assert(sizeof(s_render_geometry_api_resource) == 48);

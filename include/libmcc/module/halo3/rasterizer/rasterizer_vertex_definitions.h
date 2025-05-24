@@ -419,4 +419,36 @@ namespace libmcc::halo3 {
         _vertex_buffer_declaration_none,                // _vertex_type_implicit_geometry
         _vertex_buffer_declaration_none,                // _vertex_type_beam
     };
+
+    struct s_world_vertex {
+        float position[3]; 
+        float texcoord[2]; 
+        short normal[4]; 
+        short tangent[4];
+        short binormal[4];
+    };
+
+    static_assert(sizeof(s_world_vertex) == 44);
+
+    struct s_rigid_vertex {
+        unsigned short position[4]; 
+        unsigned short texcoord[2]; 
+        short normal[4]; 
+        short tangent[4];
+        short binormal[4];
+    };
+
+    static_assert(sizeof(s_rigid_vertex) == 36);
+
+    struct s_skinned_vertex {
+        unsigned short position[4];
+        unsigned short texcoord[2];
+        short normal[4];
+        short tangent[4];
+        short binormal[4];
+        unsigned char blend_indices[4];
+        unsigned char blend_weight[4];
+    };
+
+    static_assert(sizeof(s_skinned_vertex) == 44);
 }

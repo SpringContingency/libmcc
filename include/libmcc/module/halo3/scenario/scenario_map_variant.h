@@ -7,13 +7,6 @@
 #include "../../../scenario/scenario_map_variant.h"
 
 namespace libmcc::halo3 {
-    struct c_object_identifier {
-        int m_unique_id;
-        uint16_t m_origin_bsp_index;
-        char m_type;
-        char m_source;
-    };
-
     struct s_variant_multiplayer_object_properties_definition {
         uint16_t game_engine_flags;
         byte object_flags;
@@ -76,6 +69,36 @@ namespace libmcc::halo3 {
         k_map_variant_palette_none = 0,
     };
 
+    constexpr uint64_t scenario_object_offset(e_map_variant_palette palette) {
+        constexpr uint64_t scenario_object_offset[]{
+            offsetof(scenario_definition, scenery),
+            offsetof(scenario_definition, vehicles),
+            offsetof(scenario_definition, weapons),
+            offsetof(scenario_definition, equipment),
+            offsetof(scenario_definition, crates)
+        };
+
+        if (palette < _map_variant_palette_scenario_scenery || palette > _map_variant_palette_scenario_crates)
+            return 0;
+
+        return scenario_object_offset[palette - _map_variant_palette_scenario_scenery];
+    }
+
+    constexpr uint64_t scenario_object_size(e_map_variant_palette palette) {
+        constexpr uint64_t scenario_object_size[]{
+            sizeof(s_scenario_scenery),
+            sizeof(s_scenario_vehicle),
+            sizeof(s_scenario_weapon),
+            sizeof(s_scenario_equipment),
+            sizeof(s_scenario_crate)
+        };
+
+        if (palette < _map_variant_palette_scenario_scenery || palette > _map_variant_palette_scenario_crates)
+            return 0;
+
+        return scenario_object_size[palette - _map_variant_palette_scenario_scenery];
+    }
+
     constexpr uint64_t map_variant_palette_offset(e_map_variant_palette palette) {
         constexpr uint64_t map_variant_palette_offset[]{
             offsetof(scenario_definition, map_variant_vehicle_palette),
@@ -92,11 +115,10 @@ namespace libmcc::halo3 {
             offsetof(scenario_definition, crate_palette),
         };
 
-        if (palette <= 0 || palette > k_map_variant_palette_count) {
+        if (palette <= 0 || palette > k_map_variant_palette_count)
             return 0;
-        } else {
-            return map_variant_palette_offset[palette - 1];
-        }
+        
+        return map_variant_palette_offset[palette - 1];
     }
 
     constexpr uint64_t map_variant_palette_size(e_map_variant_palette palette) {

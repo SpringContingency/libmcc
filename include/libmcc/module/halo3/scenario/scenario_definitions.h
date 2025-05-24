@@ -1,7 +1,6 @@
 #pragma once
 
-#include "../native.h"
-#include "../tag_files/tag_files.h"
+#include "scenario_object_definitions.h"
 
 namespace libmcc::halo3 {
     struct s_structure_bsp;
