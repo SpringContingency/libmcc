@@ -113,7 +113,7 @@ namespace libmcc::halo3 {
 
     struct c_structure_bsp_resource_interface {
         c_typed_tag_block<s_structure_bsp_resources> raw_resources;
-        s_tag_resource tag_resources;
+        c_typed_tag_resource<s_structure_bsp_resources> tag_resources;
         s_tag_resource cache_file_resources;
         int use_resource_items;
 

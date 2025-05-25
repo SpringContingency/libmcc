@@ -29,6 +29,12 @@ namespace libmcc::halo3 {
 
 	static_assert(sizeof(s_map_variant_palette) == 0x1C);
 
+    struct scenario_object_name {
+        char name[32];
+        short object_type;
+        short placement_index;
+    };
+
     union scenario_definition {
         struct {
             uint16_t type;
@@ -49,7 +55,7 @@ namespace libmcc::halo3 {
             s_tag_data editor_scenario_data;
             s_tag_block comments;
             s_tag_block unused_scenario_environment_objects;
-            s_tag_block object_names;
+            c_typed_tag_block<scenario_object_name> object_names;
             s_tag_block scenery;
             s_tag_block scenery_palette;
             s_tag_block bipeds;

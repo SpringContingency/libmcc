@@ -50,9 +50,9 @@ namespace libmcc::halo3 {
 	struct s_mesh {
 		c_typed_tag_block<s_part> parts;
 		c_typed_tag_block<s_subpart> subparts;
-		uint16_t vertex_buffer_indices[8];
-		uint16_t index_buffer_indices[2];
-		uint8_t mesh_flags;
+		short vertex_buffer_indices[8];
+		short index_buffer_indices[2];
+		char mesh_flags;
 		char rigid_node_index;
 		e_vertex_type vertex_type;
 		e_prt_type prt_vertex_type;

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../memory/data.h"
+#include "object_definitions.h"
 
 namespace libmcc::halo3 {
     enum {
