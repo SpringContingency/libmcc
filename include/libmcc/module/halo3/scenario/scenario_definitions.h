@@ -1,6 +1,7 @@
 #pragma once
 
 #include "scenario_object_definitions.h"
+#include "scenario_lightmap_definitions.h"
 
 namespace libmcc::halo3 {
     struct s_structure_bsp;
@@ -155,6 +156,23 @@ namespace libmcc::halo3 {
             s_tag_reference sound_effect_collection;
             s_tag_block crates;
             s_tag_block crate_palette;
+            s_tag_block flock_palette;
+            s_tag_block flocks;
+			s_tag_reference subtitle_strings;
+            s_tag_block creatures;
+			s_tag_block creature_palette;
+            s_tag_block editor_folders;
+            s_tag_block mission_dialogue;
+            s_tag_reference objective_strings;
+            s_tag_block interpolators;
+            s_tag_block shared_references;
+            s_tag_block screen_effect_references;
+            s_tag_reference camera_effects;
+            s_tag_reference global_screen_effect;
+            s_tag_reference sky_parameters;
+            s_tag_reference global_lighting;
+            s_tag_block chocolate_mountains;
+            c_typed_tag_reference<s_scenario_lightmap> lightmaps;
         };
         char data[0x780];
     };

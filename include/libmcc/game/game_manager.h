@@ -109,19 +109,19 @@ namespace libmcc {
         virtual bool __fastcall validate_cache_file(int a2) = 0;
 
 		// 0x1A8
-        virtual uintptr_t __fastcall sub_1401E6664() = 0;
+        virtual uintptr_t __fastcall sub_1401E6664(void* a2) = 0;
 
 		// 0x1B0
-        virtual uintptr_t __fastcall sub_1401E66C4() = 0;
+        virtual uintptr_t __fastcall get_mcc_string(const char* string_name, wchar_t* buf, size_t len) = 0;
         
 		// 0x1B8
-        virtual uintptr_t __fastcall sub_1401E67A8() = 0;
+        virtual bool __fastcall use_custom_string_mapping() = 0;
 
 		// 0x1C0
-        virtual uintptr_t __fastcall sub_1401E67D4() = 0;
+        virtual void __fastcall insert_string(int unic_datum_index, int string_id, const char* unic_tag_name, const char* string_name) = 0;
 
 		// 0x1C8
-        virtual bool __fastcall get_game_mode(int a2, unsigned int a3, wchar_t* buf, size_t len) = 0;
+        virtual bool __fastcall get_string(int unic_datum_index, int string_id, wchar_t* buf, size_t len) = 0;
 
 		// 0x1D0
         virtual bool __fastcall get_subtitle(const char* sound_tag_name, const char* prefix, int index, wchar_t* buf, size_t len) = 0;

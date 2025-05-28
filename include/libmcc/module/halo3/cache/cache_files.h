@@ -7,12 +7,21 @@
 #include "../memory/wrapped_arrays.h"
 
 namespace libmcc::halo3 {
-    enum {
-        k_cache_file_content_hash_count = 7,
-    };
-
     enum e_cache_file_status : int {
         _cache_file_loaded = 2,
+    };
+
+    enum e_cache_file_shared_file_type
+    {
+        _shared_file_sounds,
+        _shared_file_mainmenu,
+        _shared_file_multiplayer,
+        _shared_file_campaign,
+        k_number_of_shared_file_types,
+    };
+
+    struct s_tag_persistent_identifier {
+        int data[4];
     };
 
     struct s_cache_file_global_tag_index {
@@ -33,10 +42,14 @@ namespace libmcc::halo3 {
         uint32_t address;
     };
 
+    struct s_cache_file_tag_interop {
+
+    };
+
     struct s_cache_file_tag_interop_type_fixup {
-        int* in_out_interop;
-        int type_index;
-        int padding;
+        s_cache_file_tag_interop* interop_address;
+        int cache_file_interop_type;
+        int : 32;
     };
 
     struct s_cache_file_tags_header {
@@ -91,13 +104,6 @@ namespace libmcc::halo3 {
         k_number_of_cache_file_partition_types = 0x6,
     };
 
-    struct s_cache_file_partition {
-        uint64_t base_address;
-        int32_t size;
-    };
-
-    static_assert(sizeof(s_cache_file_partition) == 0x10);
-
     enum e_cache_file_section : __int32 {
         _cache_file_section_debug = 0x0,
         _cache_file_section_resource = 0x1,
@@ -111,90 +117,132 @@ namespace libmcc::halo3 {
         int size;
     };
 
-    struct s_cache_file_interop {
-        int section_offsets[k_number_of_cache_file_sections];
-        s_cache_file_section_file_bounds original_section_bounds[k_number_of_cache_file_sections];
-    };
-
     struct s_cache_file_insertion_point_resource_usage {
-        char __data[184];
+        char initial_zone_set_index;
+        char : 8;
+        char : 8;
+        char : 8;
+        int shared_required_locations[35];
+        int local_required_locations[10];
     };
 
-    struct s_cache_file_shared_resource_usage_s1 {
-        char __data[28];
+    static_assert(sizeof(s_cache_file_insertion_point_resource_usage) == 184);
+
+    struct s_cache_file_local_resource_location {
+        int flags: 2;
+        int file_size: 30;
+        int memory_size;
+
+        s_network_http_request_hash entire_checksum;
     };
 
-    union s_cache_file_shared_resource_usage {
-        struct {
-   /*         s_cache_file_shared_resource_usage_s1
-            s_cache_file_insertion_point_resource_usage
-            char size;*/
-        };
-        char __data[9000];
+    static_assert(sizeof(s_cache_file_local_resource_location) == 28);
+
+    struct s_cache_file_shared_resource_usage {
+        s_tag_persistent_identifier shared_layout_identifier;
+        short shared_location_count;
+        short local_location_count;
+        int first_file_offset;
+
+        s_tag_persistent_identifier codec_identifier;
+        s_cache_file_local_resource_location local_locations[320];
+
+        byte insertion_point_usage_count; // 9000
+        char : 8;
+        char : 8;
+        char : 8;
+        s_cache_file_insertion_point_resource_usage insertion_point_usages[12];
     };
+
+    static_assert(sizeof(s_cache_file_shared_resource_usage) == 11212);
+
+    enum e_cache_file_content_hash {
+        _cache_file_content_hash_header,
+        _cache_file_content_hash_tags_language_dependent,
+        _cache_file_content_hash_tags_language_neutral,
+        k_cache_file_content_hash_count
+    };
+
+#pragma pack(push, 1)
 
     struct s_cache_file_header {
-        tag header_signature;
-        uint32_t version;
-        int file_size;
-        char halo_engine;
-        int tag_buffer_offset;
-        int tag_buffer_size; // [0, 2GB]
-        e_scenario_type scenario_type; // [0, 6)
-        int header_flags;
-        int file_table_count;
-        int file_table_offset;
-        int file_table_size;
-        int file_index_table_offset;
-        int string_table_count;
-        int string_table_offset;
-        int string_table_size;
-        int string_index_table_offset;
-        int string_namespace_table_count;
-        int string_namespace_table_offset;
-        int : 32;
-        int : 32;
-        s_file_last_modification_date last_modification_date;
-        int : 32;
-        int : 32;
-        int : 32;
-        int : 32;
-        int : 32;
-        int : 32;
-        int : 32;
-        int : 32;
-        int : 32;
-        int : 32;
-        int : 32;
-        int : 32;
-        int : 32;
-        int : 32;
-        int : 32;
-        int : 32;
-        int : 32;
-        int : 32;
-        char build[0x20];
-        char internal_name[0x20];
-        char source_file[0x100];
-        char map_path[0x100];
-        cache_file_tag_instance_t* expected_base_address; // 736
-        s_cache_file_tags_header* tags_header;
-        int xdk_version;
-        uint64_t : 64;
-		s_cache_file_partition partitions[k_number_of_cache_file_partition_types]; // 768
-        int checksum1; // 864
-        int content_hash_mask;
-        uint64_t signature; // 0x17800EA664197BFCLL
-        s_network_http_request_hash content_hashes[3]; // 880
-        s_cache_file_header_hash hash;
-        s_rsa_signature rsa_signature; // 972
-        s_cache_file_interop interop; // 1228
-        s_cache_file_shared_resource_usage shared_resource_usage; // 1276
-        int insertion_point_count;
-        s_cache_file_insertion_point_resource_usage insertion_point_resource_usage_storage[12]; // 10280
-        char data1[3892];
-        tag footer_signature; // 16380
+        union {
+            struct {
+                int header_signature;
+                uint32_t version;
+                int file_size;
+                char halo_engine;
+                char : 8;
+                char : 8;
+                char : 8;
+
+                int tag_buffer_offset;
+                int tag_buffer_size; // [0, 2GB]
+
+                e_scenario_type scenario_type; // [0, 6)
+                short shared_cache_file_type;
+                short flags;
+                short shared_map_usage;
+
+                int debug_tag_name_count; // 32
+                int debug_tag_name_data_offset;
+                int debug_tag_name_data_size;
+                int debug_tag_name_index_offset;
+
+                int string_id_count;
+                int string_id_data_offset;
+                int string_id_data_count;
+                int string_id_index_offset;
+
+                int string_namespace_table_count;
+                int string_namespace_table_offset;
+
+                int language;
+                int minor_version_number;
+                s_file_last_modification_date creation_date;
+                s_file_last_modification_date shared_creation_date[k_number_of_shared_file_types];
+                int : 32;
+                int : 32;
+                int : 32;
+                int : 32;
+                int : 32;
+                int : 32;
+                int : 32;
+                int : 32;
+                int : 32;
+                int : 32;
+                char build_number[0x20]; // 160
+                char internal_name[0x20];
+                char tag_path[0x100];
+                char map_path[0x100];
+                cache_file_tag_instance_t* expected_base_address; // 736
+                s_cache_file_tags_header* tags_header;
+                int : 32;
+                int : 32;
+                int : 32;
+                int : 32;
+                c_basic_buffer tag_post_link_buffer; // 768
+                c_basic_buffer tag_language_dependent_read_only_buffer;
+                c_basic_buffer tag_language_dependent_read_write_buffer;
+                c_basic_buffer tag_language_neutral_read_write_buffer;
+                c_basic_buffer tag_language_neutral_write_combined_buffer;
+                c_basic_buffer tag_language_neutral_read_only_buffer;
+                int : 32;
+                int content_hash_mask; // 868
+                uint64_t signature_marker; // 0x17800EA664197BFCLL
+                s_network_http_request_hash content_hashes[k_cache_file_content_hash_count]; // 880
+                s_cache_file_header_hash hash;
+                s_rsa_signature rsa_signature; // 972
+                int section_offsets[k_number_of_cache_file_sections]; // 1228
+                s_cache_file_section_file_bounds original_section_bounds[k_number_of_cache_file_sections];
+                s_cache_file_shared_resource_usage shared_resource_usage; // 1276
+            };
+            char __data[0x3FFC];
+        };
+        int footer_signature; // 16380
     };
+
+#pragma pack(pop)
 
     static_assert(sizeof(s_cache_file_header) == 0x4000);
 
@@ -330,7 +378,7 @@ namespace libmcc::halo3 {
     };
 
     TAG_GROUP(CACHE_FILE_RESOURCE_GESTALT_TAG)
-        struct s_cache_file_resource_gestalt {
+    struct s_cache_file_resource_gestalt {
         e_scenario_type scenario_type;
         uint16_t scenario_flags;
         s_tag_block resource_type_identifiers;

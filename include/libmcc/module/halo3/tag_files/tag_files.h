@@ -2,6 +2,7 @@
 
 #include "./files.h"
 #include "./tag_groups.h"
+#include "./string_ids.h"
 #include "../memory/data.h"
 #include "tag_api_interop.h"
 
