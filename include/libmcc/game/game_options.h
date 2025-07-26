@@ -74,11 +74,47 @@ namespace libmcc {
 		_game_options_flags_debug = 9, // enable init.txt and terminal
 	};
 
-	union s_game_options_skulls {
-		struct {
-
-		};
-		uint64_t value;
+	enum e_skull {
+		_skull_anger,
+		_skull_assassins,
+		_skull_bandanna,
+		_skull_black_eye,
+		_skull_blind,
+		_skull_bonded_pair,
+		_skull_boom,
+		_skull_catch,
+		_skull_cowbell,
+		_skull_envy,
+		_skull_eye_patch,
+		_skull_famine,
+		_skull_feather,
+		_skull_fog,
+		_skull_foreign,
+		_skull_ghost,
+		_skull_grunt_birthday_party,
+		_skull_grunt_funeral,
+		_skull_iron,
+		_skull_iwhbyd,
+		_skull_jacked,
+		_skull_malfunction,
+		_skull_masterblaster,
+		_skull_mythic,
+		_skull_pinata,
+		_skull_prophet_birthday_party,
+		_skull_recession,
+		_skull_scarab,
+		_skull_so_angry,
+		_skull_sputnik,
+		_skull_streaking,
+		_skull_swarm,
+		_skull_thats_just_wrong,
+		_skull_they_come_back,
+		_skull_thunderstorm,
+		_skull_tilt,
+		_skull_tough_luck,
+		_skull_boots_off_the_ground,
+		k_skull_count,
+		k_skull_none = 0,
 	};
 
 	struct s_game_options_unknown {
@@ -119,7 +155,7 @@ namespace libmcc {
 		int campaign_insertion_point;
 		int : 32;
 		int : 32;
-		s_game_options_skulls skulls; // 72
+		s_flags<uint64_t, e_skull> skulls; // 72
 		__int64 un_2;
 		__int64 host_address;
 		s_player_options player_options;

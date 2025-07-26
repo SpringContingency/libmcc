@@ -166,7 +166,7 @@ namespace libmcc {
     };
 
     struct s_custom_keyboard_mouse_mapping_v2 {
-        int abstract_button;
+        e_game_abstract_button abstract_button;
         int virtual_key_codes[5];
     };
 

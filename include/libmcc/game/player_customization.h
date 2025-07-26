@@ -1,12 +1,13 @@
 #pragma once
 
 #include <cstdint>
+#include "../objects/damage_reporting.h"
 
 namespace libmcc {
     enum e_customization_item : uint32_t;
 
     struct s_skin_customization {
-        int object; 
+        e_damage_reporting_type object; 
         e_customization_item skin; 
     };
 
