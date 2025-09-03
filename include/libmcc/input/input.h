@@ -28,7 +28,7 @@ namespace libmcc {
         _gamepad_button_y = 13,
     };
 
-    enum e_abstract_gamepad_button : char {
+    enum e_abstract_gamepad_button : unsigned char {
         _abstract_gamepad_button_left_trigger,
         _abstract_gamepad_button_right_trigger,
         _abstract_gamepad_button_up,
