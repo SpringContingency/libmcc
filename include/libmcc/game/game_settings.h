@@ -48,7 +48,8 @@ namespace libmcc {
     static_assert(sizeof(s_render_settings) == 184);
 
     struct s_general_video_settings {
-        uint64_t : 64;
+        int width;
+        int width;
         char texture_resolution;
         char texture_filtering_quality;
         char lighting_quality;
