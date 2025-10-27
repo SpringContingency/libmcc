@@ -49,7 +49,7 @@ namespace libmcc {
 
     struct s_general_video_settings {
         int width;
-        int width;
+        int height;
         char texture_resolution;
         char texture_filtering_quality;
         char lighting_quality;
