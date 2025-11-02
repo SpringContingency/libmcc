@@ -2,6 +2,8 @@
 
 #include "native.h"
 
+#include "./cache/cache_files.h"
+
 namespace libmcc::halo1 {
     namespace ds {class BIT_STREAM {};}
 
