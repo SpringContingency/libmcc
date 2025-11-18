@@ -3,9 +3,9 @@ name: Doxygen
 # Controls when the workflow will run
 on:
   push:
-    branches: [ "doxygen" ]
+    branches: [ "header_only" ]
   pull_request:
-    branches: [ "doxygen" ]
+    branches: [ "header_only" ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
