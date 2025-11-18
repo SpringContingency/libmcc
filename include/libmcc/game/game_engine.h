@@ -36,22 +36,22 @@ namespace libmcc {
 
     class i_game_engine : public i_unknown {
     public:
-        virtual void __fastcall initialize(
-            ID3D11Device*, 
-            ID3D11DeviceContext*, 
-            IDXGISwapChain*, 
+        virtual void __fastcall initialize_graphics(
+            ID3D11Device*,
+            ID3D11DeviceContext*,
+            IDXGISwapChain*,
             IDXGISwapChain* = nullptr
         ) = 0;
         virtual HANDLE __fastcall initialize_game(
-            i_game_manager*, 
+            i_game_manager*,
             const s_game_options*
         ) = 0;
         virtual PSLIST_ENTRY __fastcall post_message(
             e_game_message,
             const s_game_message_parameter*
         ) = 0;
-        virtual void __fastcall _() = 0;
-        virtual void __fastcall __() = 0;
+        virtual void __fastcall preload_common_begin(ID3D11Device*) = 0;
+        virtual void __fastcall preload_level_begin(int map_id) = 0;
         virtual void __fastcall ___() = 0;
         virtual void __fastcall ____() = 0;
         virtual void __fastcall _____() = 0;
