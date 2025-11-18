@@ -1,0 +1,28 @@
+name: Doxygen
+
+# Controls when the workflow will run
+on:
+  push:
+    branches: [ "doxygen" ]
+  pull_request:
+    branches: [ "doxygen" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Build
+        uses: mattnotmitt/doxygen-action@v1.12.0
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build/html
